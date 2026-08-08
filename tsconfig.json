@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/shared/tsconfig.json" },
+    { "path": "./packages/ui/tsconfig.json" },
+    { "path": "./apps/portal-propuestas/tsconfig.json" },
+    { "path": "./apps/mejora-mi-barrio/tsconfig.json" },
+    { "path": "./apps/cuaderno-matematico/tsconfig.json" },
+    { "path": "./apps/encuentra-mi-mascota/tsconfig.json" }
+  ]
+}

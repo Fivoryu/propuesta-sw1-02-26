@@ -1,0 +1,19 @@
+# Local Pi runtime state
+.atl/
+
+# Workspace output
+node_modules/
+dist/
+build/
+.tsbuild/
+*.tsbuildinfo
+
+# Test, bundler, and local cache output
+.vite/
+.cache/
+.turbo/
+coverage/
+.vitest/
+test-results/
+playwright-report/
+*.log
