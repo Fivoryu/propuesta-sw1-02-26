@@ -10,6 +10,7 @@
     "dev:barrio": "corepack pnpm --filter @propuestas/mejora-mi-barrio dev",
     "dev:cuaderno": "corepack pnpm --filter @propuestas/cuaderno-matematico dev",
     "dev:mascota": "corepack pnpm --filter @propuestas/encuentra-mi-mascota dev",
+    "dev:nutrivision": "corepack pnpm --filter @propuestas/nutrivision dev",
     "test": "vitest",
     "test:run": "vitest run",
     "typecheck": "tsc -b",

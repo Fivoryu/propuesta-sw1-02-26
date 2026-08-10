@@ -6,6 +6,7 @@
     { "path": "./apps/portal-propuestas/tsconfig.json" },
     { "path": "./apps/mejora-mi-barrio/tsconfig.json" },
     { "path": "./apps/cuaderno-matematico/tsconfig.json" },
-    { "path": "./apps/encuentra-mi-mascota/tsconfig.json" }
+    { "path": "./apps/encuentra-mi-mascota/tsconfig.json" },
+    { "path": "./apps/nutrivision/tsconfig.json" }
   ]
 }
