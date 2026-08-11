@@ -1,5 +1,6 @@
 # Local Pi runtime state
 .atl/
+.codegraph/
 
 # Workspace output
 node_modules/

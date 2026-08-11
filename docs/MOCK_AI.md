@@ -179,6 +179,47 @@ findPetMatches(
 
 Scores rank fictional candidates; they do not identify an animal or provide a safe-contact guarantee.
 
+## analyzeFoodMock
+
+### Signature
+
+```ts
+analyzeFoodMock(
+  image?: string,
+  options?: FoodAnalysisOptions,
+): Promise<FoodAnalysisResult>;
+```
+
+### Example input
+
+```json
+{
+  "image": "fixture-plate-01",
+  "scenarioId": "food-success-high"
+}
+```
+
+### Example output
+
+```json
+{
+  "scenarioId": "food-success-high",
+  "status": "success",
+  "latencyMs": 2800,
+  "disclaimer": "simulated",
+  "calories": 610,
+  "protein": 52,
+  "carbs": 66,
+  "fats": 16,
+  "foods": [
+    { "name": "Arroz cocido", "grams": 175, "confidence": 96 },
+    { "name": "Pechuga de pollo", "grams": 135, "confidence": 92 }
+  ]
+}
+```
+
+El servicio devuelve alimentos clonados para que la corrección de una porción no modifique el fixture. Los escenarios `food-low-confidence`, `food-duplicate` y `food-no-match` conservan el payload demostrativo y cambian el estado para que el contrato pueda ejercitar cada camino. Un escenario desconocido, incluido `food-error`, devuelve `MOCK_ANALYSIS_UNAVAILABLE` sin presentar datos nutricionales como válidos.
+
 ## Scenario Matrix
 
 Each service exposes the same status vocabulary with product-specific meaning. The matrix must be reachable through named fixtures so the presentation and automated tests can exercise every path.
@@ -188,6 +229,7 @@ Each service exposes the same status vocabulary with product-specific meaning. T
 | `analyzeUrbanIssue` | `urban-success-high`: classifies a fixture issue with confidence `0.92`. | `urban-low-confidence`: returns an ambiguous category and `suggestedCorrections`. | `urban-duplicate`: returns one or more similar local report fixtures. | `urban-no-match`: returns no comparable local fixture and an unresolved classification; absence is not proof of no real issue. | `urban-error`: returns `MOCK_ANALYSIS_UNAVAILABLE`; draft remains editable. |
 | `recognizeEquation` | `equation-success-high`: returns a normalized expression with confidence `0.96`. | `equation-low-confidence`: marks ambiguous tokens and requires correction. | `equation-duplicate`: indicates that the normalized expression already exists in the local notebook. | `equation-no-match`: returns no parseable equation for the selected fixture. | `equation-error`: returns `MOCK_RECOGNITION_UNAVAILABLE`; typed input remains. |
 | `findPetMatches` | `pet-success-ranked`: returns ranked fictional candidates with reasons. | `pet-low-confidence`: returns candidates whose traits are insufficient for a confident review. | `pet-duplicate`: indicates a similar local lost/found profile. | `pet-no-match`: returns an empty candidate list and broadening guidance. | `pet-error`: returns `MOCK_MATCHING_UNAVAILABLE`; safe profile fields remain. |
+| `analyzeFoodMock` | `food-success-high`: returns cloned foods and estimated macronutrients. | `food-low-confidence`: marks the simulated result for human review. | `food-duplicate`: signals a repeated local analysis scenario. | `food-no-match`: signals that no comparable food result was found in the fixture. | `food-error`: returns `MOCK_ANALYSIS_UNAVAILABLE`; no nutritional payload is presented. |
 
 ## Result Shapes
 

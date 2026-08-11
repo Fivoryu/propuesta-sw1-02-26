@@ -142,4 +142,51 @@ export const proposalCatalog: readonly Proposal[] = [
     accent: 'violet',
     appUrlEnvVar: 'VITE_ENCUENTRA_MI_MASCOTA_APP_URL',
   },
+  {
+    id: 'nutrivision',
+    name: 'NutriVision',
+    shortName: 'Nutri',
+    category: 'Salud y alimentación',
+    eyebrow: 'Comer mejor',
+    summary:
+      'Una guía móvil para fotografiar comidas, estimar macros y registrar el progreso sin presentar la simulación como consejo profesional.',
+    problem:
+      'Estimar porciones y macronutrientes a mano puede volver lento el seguimiento diario y dejar dudas sobre qué se registró antes de continuar.',
+    beneficiaries: [
+      'Personas que buscan mejorar su alimentación',
+      'Personas que entrenan y siguen macronutrientes',
+      'Equipos que diseñan experiencias digitales de bienestar',
+    ],
+    primaryFunction:
+      'Recibir datos de perfil, calcular metas orientativas, analizar una comida de forma simulada, permitir correcciones y registrar el resultado en un seguimiento local.',
+    quality:
+      'Prioriza una experiencia móvil clara, estimaciones explícitas, corrección manual y un aviso visible de que los datos son demostrativos.',
+    productivity:
+      'Reduce el registro manual de alimentos dentro de la demostración, sin prometer ahorro de tiempo ni precisión nutricional medida.',
+    innovation:
+      'Combina análisis visual simulado, metas personalizadas y revisión humana antes de incorporar una comida al seguimiento.',
+    monetization:
+      'Hipótesis futura: suscripción de bienestar o alianzas con gimnasios y profesionales, sujeta a validación, seguridad y límites clínicos.',
+    prototypeLimits:
+      'Los alimentos y valores son fixtures locales; no hay modelo real, backend, cuenta, sincronización ni consejo médico o nutricional profesional.',
+    futureDirection:
+      'Una futura versión podría evaluar modelos nutricionales, historial sincronizado y recomendaciones responsables después de validar precisión, privacidad y seguridad.',
+    technologies: ['React + TypeScript', 'Estado local de sesión', 'Mock determinista de análisis', 'Interfaz mobile-first'],
+    flow: [
+      'Completar el perfil y elegir un objetivo nutricional',
+      'Fotografiar o elegir una comida desde la galería',
+      'Revisar los alimentos detectados y corregir cantidades',
+      'Consultar macros estimados y registrar la comida localmente',
+    ],
+    criteria: {
+      calidad: { score: 4, note: 'Estimaciones claras y corrección manual' },
+      productividad: { score: 4, note: 'Agiliza el registro de una comida' },
+      innovacion: { score: 4, note: 'Análisis visual revisable' },
+      monetizacion: { score: 3, note: 'Alianzas de bienestar por validar' },
+      dificultadTecnica: { score: 4, note: 'Flujo móvil y datos nutricionales' },
+      iaFutura: { score: 5, note: 'Visión nutricional supervisada' },
+    },
+    accent: 'amber',
+    appUrlEnvVar: 'VITE_NUTRIVISION_APP_URL',
+  },
 ]

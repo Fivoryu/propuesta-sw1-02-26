@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --port 5173",
     "build": "tsc -b && vite build",
+    "typecheck": "tsc -b",
     "test": "corepack pnpm --dir ../.. exec vitest apps/portal-propuestas/src",
     "test:run": "corepack pnpm --dir ../.. exec vitest run apps/portal-propuestas/src",
     "preview": "vite preview --port 5173"
