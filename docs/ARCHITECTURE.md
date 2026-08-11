@@ -33,12 +33,21 @@ The following is the proposed implementation tree. It is a target contract, not 
 │   │   │   ├── services/mock/        # recognizeEquation adapter
 │   │   │   └── main.tsx
 │   │   └── package.json
-│   └── encuentra-mi-mascota/
+│   ├── encuentra-mi-mascota/
+│   │   ├── src/
+│   │   │   ├── app/
+│   │   │   ├── presentation/
+│   │   │   ├── domain/               # pet profile, duplicate, and match rules
+│   │   │   ├── services/mock/        # findPetMatches adapter
+│   │   │   └── main.tsx
+│   │   └── package.json
+│   └── nutrivision/
 │       ├── src/
 │       │   ├── app/
 │       │   ├── presentation/
-│       │   ├── domain/               # pet profile, duplicate, and match rules
-│       │   ├── services/mock/        # findPetMatches adapter
+│       │   ├── domain/               # profile, nutrition goals, and meal rules
+│       │   ├── services/mock/        # analyzeFoodMock adapter
+│       │   ├── state/                # local session state
 │       │   └── main.tsx
 │       └── package.json
 ├── packages/
@@ -90,6 +99,7 @@ The following is the proposed implementation tree. It is a target contract, not 
 | `mejora-mi-barrio` | Report draft, approximate location, category correction, duplicate review, and urban-analysis result rendering. | Municipal submission, live maps, or a real classifier. |
 | `cuaderno-matematico` | Equation input, recognition review, correction, notebook presentation, and equation-specific validation. | General-purpose OCR, grading, or a real solver service. |
 | `encuentra-mi-mascota` | Lost/found profile form, candidate ranking presentation, duplicate review, and safe next-step preview. | Live contact exchange, identity verification, or a real image search service. |
+| `nutrivision` | Profile setup, orientative nutrition goals, food-analysis review, manual corrections, meal registration, and local history. | Medical advice, a real vision model, backend persistence, or synchronized nutrition records. |
 
 ## Shared Package Responsibilities
 
@@ -157,6 +167,7 @@ Each app owns its router and has a direct-entry route map:
 | Barrio | `/`, `/reportar`, `/reportes/resumen` |
 | Cuaderno | `/`, `/practicar`, `/cuaderno` |
 | Mascota | `/`, `/publicar`, `/buscar`, `/coincidencias` |
+| NutriVision | `/`, `/profile-setup`, `/goal`, `/home`, `/camera`, `/processing`, `/analysis`, `/nutrition-result`, `/success`, `/history`, `/meal/:id`, `/profile` |
 
 Routes are names for the implementation phase and may add an identifier segment when a view needs one. Navigation should use the app router, not hard-coded full URLs between apps. The portal links to an app entry URL supplied by the presentation environment.
 

@@ -66,6 +66,7 @@ Colors are semantic tokens. Product screens should consume theme tokens rather t
 | Mejora Mi Barrio | `#0E7C66` civic teal | `#E76F51` alert coral | `#F2F7F4` soft green | `#17332D` forest ink | civic, optimistic, grounded, map-adjacent |
 | Cuaderno Matemático | `#2457D6` cobalt | `#F4C95D` chalk yellow | `#F6F8FC` cool paper | `#17213B` navy ink | focused, geometric, study-friendly |
 | Encuentra Mi Mascota | `#7257D9` violet | `#F18F6A` warm peach | `#FFF8F2` cream | `#2B2230` plum ink | warm, caring, approachable, photo-led |
+| NutriVision | `#2F9E44` | `#F59F00` | `#FBFDF8` | `#1C2B22` | natural, analytical, mobile-first, food-led |
 
 Each theme also needs semantic colors independent of product identity: success `#147D64`, warning `#A46600`, error `#B42318`, info `#1769AA`, and neutral `#5B6472`. Pair them with an icon and text label; never communicate status with color alone.
 

@@ -102,6 +102,29 @@ These flows define what the presentation must demonstrate. All visible copy is S
 6. **Correction**: Editing species, color, size, or area reruns the search only after the user submits again; stale results are labeled as previous results.
 7. **Cancel**: A non-empty profile uses `Seguir editando` and `Descartar borrador`. No real publication is removed because none exists.
 
+## 5. NutriVision
+
+### Primary flow: analizar y registrar una comida
+
+1. **Inicio**: La persona abre `/` y conoce la propuesta de seguimiento nutricional mediante la acción `Comenzar`.
+2. **Perfil**: Completa edad, peso, estatura, sexo biológico y nivel de actividad en `/profile-setup`; la pantalla explica que las metas son orientativas.
+3. **Objetivo**: En `/goal`, elige `Ganancia muscular`, `Mantener peso`, `Reducir peso` o `Mejorar alimentación`, y puede ajustar las metas calculadas.
+4. **Captura**: Desde `/home`, elige `Analizar comida`, fotografía el plato o selecciona una imagen con `Elegir de galería`.
+5. **Carga**: `/processing` muestra `Analizando` y pasos como `Identificando alimentos...` durante la demora controlada del mock. La solicitud se cancela si la persona abandona la vista.
+6. **Revisión**: `/analysis` muestra alimentos, confianza y proporciones como una detección visual simulada. La persona puede abrir `Editar` para corregir un alimento.
+7. **Corrección**: La persona ajusta `Cantidad estimada` y confirma con `Guardar cambios`; la corrección se aplica solo al estado local de la sesión.
+8. **Confirmación**: `/nutrition-result` muestra `Energía estimada`, macronutrientes y el aviso de que los valores son aproximaciones antes de `Registrar comida`.
+9. **Completitud**: `/success` confirma `¡Comida registrada!` y permite `Volver al inicio`; la comida queda disponible en el historial local de la demostración.
+
+### Recovery flow: cancelar, corregir o volver a analizar
+
+1. **Cancel**: Si la persona sale de `/processing`, el `AbortController` cancela la solicitud simulada y no actualiza la vista con un resultado pendiente.
+2. **Correction**: Desde el análisis, `Editar` abre el alimento seleccionado y `Guardar cambios` conserva la revisión humana antes del registro.
+3. **Reanalysis**: La acción `Volver a analizar` devuelve a `/camera` para elegir otra imagen y comenzar una nueva demostración.
+4. **Error**: Si el escenario del mock no está disponible, el servicio devuelve `No pudimos analizar la comida. Tu imagen sigue en la demostración.` con un resultado local de error; no se presenta como una estimación válida.
+5. **Disclaimer**: Las vistas de procesamiento, análisis y resultado mantienen mensajes como `Esta demostración usa datos simulados; no es una predicción real.` y `Detección visual simulada`.
+6. **History**: `/history` permite revisar comidas locales de hoy y de ayer; no implica sincronización, persistencia remota ni seguimiento clínico.
+
 ## Cross-Flow Verification
 
 The implementation must be able to demonstrate at least one fixture for each result status in `MOCK_AI.md`, and every flow must expose a visible path to recover without refreshing the page. The portal may link to the apps, but each product flow must also be directly navigable and independently runnable.

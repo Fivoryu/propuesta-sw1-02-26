@@ -76,6 +76,22 @@ Encuentra Mi Mascota explores a structured lost-and-found flow for owners, rescu
 | Prototype limits | Matches are generated from fictional local fixtures; there is no live map, notification, contact exchange, shelter integration, identity verification, or guarantee of reunion. |
 | Future product claim | A real service would need consent, anti-fraud controls, moderation, safe contact exchange, image/data retention rules, and partnerships before public launch. |
 
+## 5. NutriVision (`nutrivision`)
+
+NutriVision explora un seguimiento personal de alimentación que combina metas orientativas, fotografía de comidas y revisión manual de estimaciones nutricionales. La demostración usa alimentos ficticios y datos locales; no ofrece consejo médico ni nutricional profesional.
+
+| Area | Definition |
+|---|---|
+| Problem | Estimar porciones y macronutrientes a mano puede volver lento el seguimiento diario y dejar dudas sobre qué se registró antes de continuar. |
+| Beneficiaries | Personas que buscan mejorar su alimentación, personas que entrenan y siguen macronutrientes, y equipos que diseñan experiencias digitales de bienestar. |
+| Primary function | Recibir datos de perfil, calcular metas orientativas, analizar una comida de forma simulada, permitir correcciones y registrar el resultado en un seguimiento local. |
+| Expected quality | Experiencia móvil clara, estimaciones explícitas, corrección manual, navegación directa y un aviso visible de que los datos son demostrativos. |
+| Productivity | Reduce el registro manual de una comida dentro de la demostración, sin prometer ahorro de tiempo ni precisión nutricional medida. |
+| Innovation | Combina análisis visual simulado, metas personalizadas y revisión humana antes de incorporar una comida al seguimiento. |
+| Monetization | Hipótesis futura: suscripción de bienestar o alianzas con gimnasios y profesionales, sujeta a validación, seguridad y límites clínicos. |
+| Prototype limits | Los alimentos y valores son fixtures locales; no hay modelo real, backend, cuenta, sincronización ni consejo médico o nutricional profesional. |
+| Future product claim | Una futura versión podría evaluar modelos nutricionales, historial sincronizado y recomendaciones responsables después de validar precisión, privacidad y seguridad. |
+
 ## Presentation Boundary
 
 The presentation may say that the team designed and will implement three coherent, testable product prototypes presented through one academic portal. It must not say that the prototypes already operate a municipal service, recognize arbitrary handwriting, match real pets, process payments, authenticate users, or use a real AI model. Those statements belong to a future validation roadmap only.

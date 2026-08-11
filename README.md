@@ -88,6 +88,7 @@ Apps are independent and can run without another app being available:
 | Mejora Mi Barrio | `corepack pnpm dev:barrio` | 5174 |
 | Cuaderno Matemático | `corepack pnpm dev:cuaderno` | 5175 |
 | Encuentra Mi Mascota | `corepack pnpm dev:mascota` | 5176 |
+| NutriVision | corepack pnpm dev:nutrivision | 5177 |
 
 The portal falls back to `/` for prototype links. To run the three product apps in parallel and link to their local ports, create `apps/portal-propuestas/.env.local` with:
 
@@ -95,6 +96,7 @@ The portal falls back to `/` for prototype links. To run the three product apps 
 VITE_MEJORA_MI_BARRIO_APP_URL=http://localhost:5174/
 VITE_CUADERNO_MATEMATICO_APP_URL=http://localhost:5175/
 VITE_ENCUENTRA_MI_MASCOTA_APP_URL=http://localhost:5176/
+VITE_NUTRIVISION_APP_URL=http://localhost:5177/
 ```
 
 ## Repository Structure

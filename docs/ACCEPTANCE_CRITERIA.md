@@ -64,6 +64,19 @@ These criteria are the implementation-phase exit contract for the academic porta
 - [ ] The next-step confirmation explicitly says that no real person or organization was contacted.
 - [ ] Empty search state provides a clear first-search action.
 
+## NutriVision
+
+- [ ] La persona puede completar perfil, objetivo y metas diarias orientativas sin backend ni cuenta.
+- [ ] La persona puede fotografiar o elegir una imagen de comida y recorrer las rutas documentadas de forma directa.
+- [ ] `analyzeFoodMock` devuelve resultados deterministas con `scenarioId`, estado, latencia, disclaimer y alimentos clonados.
+- [ ] La matriz del mock cubre éxito, baja confianza, duplicado, sin coincidencias y error con latencia `0` en tests.
+- [ ] La carga de análisis muestra pasos de demostración y una cancelación no aplica un resultado pendiente.
+- [ ] La revisión permite editar el alimento y la cantidad antes de consultar los macronutrientes.
+- [ ] El resultado muestra calorías, proteína, carbohidratos, grasas y el aviso de estimación visual.
+- [ ] Registrar una comida muestra `¡Comida registrada!` y la mantiene solo en el estado local de la sesión.
+- [ ] El error `MOCK_ANALYSIS_UNAVAILABLE` no presenta datos nutricionales como válidos ni afirma una predicción real.
+- [ ] La interfaz no afirma consejo médico, modelo de IA real, sincronización remota ni persistencia entre dispositivos.
+
 ## Cross-App Navigation and Runtime
 
 - [ ] Each app has its own Vite entry, router, and independently runnable development command after implementation.
