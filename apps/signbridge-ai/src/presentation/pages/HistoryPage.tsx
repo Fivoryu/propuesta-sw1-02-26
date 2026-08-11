@@ -4,7 +4,7 @@ import { useRecognitionStore } from '../../stores/recognitionStore'
 import { useSpeech } from '../../hooks/useSpeech'
 import { cn } from '../../utils/cn'
 import type { HistoryStatus } from '../../types'
-import { recentActivity } from '../../data/mockStatistics'
+import { recentActivity } from '../../services/mock/statistics'
 
 type FilterType = 'all' | 'recognized' | 'corrected' | 'uncertain'
 

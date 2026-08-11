@@ -5,7 +5,7 @@ import {
   vocabularyStats,
   signStats,
   modelInfo,
-} from '../../data/mockStatistics'
+} from '../../services/mock/statistics'
 
 interface StatCardProps {
   label: string

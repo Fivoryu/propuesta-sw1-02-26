@@ -8,7 +8,8 @@ import type {
   SimulationMode,
   ConfidenceLevel,
 } from '../types'
-import { vocabularies } from '../data/mockSigns'
+import { vocabularies } from '../services/mock/sign-fixtures'
+import { recognizeSign } from '../services/mock/recognize-sign'
 
 function getConfidenceLevel(confidence: number): ConfidenceLevel {
   if (confidence >= 0.85) return 'HIGH'
@@ -21,18 +22,6 @@ function getPhaseFromConfidence(confidence: number): RecognitionPhase {
   if (confidence >= 0.60) return 'UNCERTAIN'
   return 'NOT_RECOGNIZED'
 }
-
-const successResults = [
-  { text: 'Hola', confidence: 0.96 },
-  { text: 'Necesito ayuda', confidence: 0.94 },
-  { text: 'Gracias', confidence: 0.91 },
-  { text: '¿Dónde está recepción?', confidence: 0.88 },
-  { text: 'Sí', confidence: 0.97 },
-  { text: 'No', confidence: 0.95 },
-  { text: 'Por favor', confidence: 0.90 },
-]
-
-const uncertainResult = { text: 'Gracias', confidence: 0.72 }
 
 interface RecognitionState {
   phase: RecognitionPhase
@@ -73,57 +62,49 @@ export const useRecognitionStore = create<RecognitionState>()(
       setShowAlternatives: (show) => set({ showAlternatives: show }),
 
       toggleHandsDetected: () =>
-        set((s) => ({ handsDetected: !s.handsDetected })),
+        set((state) => ({ handsDetected: !state.handsDetected })),
 
       simulateRecognition: (mode = 'success') => {
         set({ phase: 'READY', currentResult: null, showAlternatives: false })
 
-        setTimeout(() => {
+        window.setTimeout(() => {
           set({ phase: 'PROCESSING' })
-        }, 200)
 
-        setTimeout(() => {
-          const vocab = get().selectedVocabularyId
-          const vocabObj = vocabularies.find((v) => v.id === vocab)
+          const scenarioId =
+            mode === 'uncertain'
+              ? 'sign-low-confidence'
+              : mode === 'error'
+                ? 'sign-error'
+                : 'sign-success-high'
+          const vocabularyId = get().selectedVocabularyId
+          const vocabObj = vocabularies.find((vocabulary) => vocabulary.id === vocabularyId)
           const vocabName = vocabObj?.name ?? 'General'
 
-          if (mode === 'error') {
-            set({
-              phase: 'NOT_RECOGNIZED',
-              currentResult: null,
-              alternatives: [],
-            })
-            return
-          }
+          void recognizeSign({ vocabularyId }, { scenarioId }).then((response) => {
+            if (response.status === 'error' || !response.sign) {
+              set({
+                phase: 'NOT_RECOGNIZED',
+                currentResult: null,
+                alternatives: [],
+              })
+              return
+            }
 
-          const raw =
-            mode === 'uncertain'
-              ? uncertainResult
-              : successResults[Math.floor(Math.random() * successResults.length)]
+            const result: SignResult = {
+              text: response.sign.text,
+              confidence: response.sign.confidence,
+              level: getConfidenceLevel(response.sign.confidence),
+              vocabulary: vocabName,
+              timestamp: new Date(),
+            }
 
-          if (!raw) return
+            const newPhase = getPhaseFromConfidence(response.sign.confidence)
+            const alternatives: AlternativeResult[] =
+              newPhase === 'UNCERTAIN' ? response.alternatives : []
 
-          const result: SignResult = {
-            text: raw.text,
-            confidence: raw.confidence,
-            level: getConfidenceLevel(raw.confidence),
-            vocabulary: vocabName,
-            timestamp: new Date(),
-          }
-
-          const newPhase = getPhaseFromConfidence(raw.confidence)
-
-          const alts: AlternativeResult[] =
-            newPhase === 'UNCERTAIN'
-              ? [
-                  { text: raw.text, confidence: raw.confidence },
-                  { text: 'Necesito información', confidence: 0.19 },
-                  { text: 'Por favor', confidence: 0.09 },
-                ]
-              : []
-
-          set({ phase: newPhase, currentResult: result, alternatives: alts })
-        }, 1700)
+            set({ phase: newPhase, currentResult: result, alternatives })
+          })
+        }, 200)
       },
 
       confirmResult: () => {
@@ -144,8 +125,9 @@ export const useRecognitionStore = create<RecognitionState>()(
 
       correctResult: (correctedText) => {
         const { currentResult, history } = get()
-        const vocab = get().selectedVocabularyId
-        const vocabObj = vocabularies.find((v) => v.id === vocab)
+        const vocabObj = vocabularies.find(
+          (vocabulary) => vocabulary.id === get().selectedVocabularyId,
+        )
 
         const entry: HistoryEntry = {
           id: crypto.randomUUID(),
@@ -160,7 +142,7 @@ export const useRecognitionStore = create<RecognitionState>()(
       },
 
       removeHistoryEntry: (id) =>
-        set((s) => ({ history: s.history.filter((e) => e.id !== id) })),
+        set((state) => ({ history: state.history.filter((entry) => entry.id !== id) })),
 
       clearHistory: () => set({ history: [] }),
 
@@ -169,7 +151,7 @@ export const useRecognitionStore = create<RecognitionState>()(
     }),
     {
       name: 'signbridge-history',
-      partialize: (s) => ({ history: s.history }),
+      partialize: (state) => ({ history: state.history }),
     },
   ),
 )

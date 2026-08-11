@@ -7,8 +7,8 @@
     "dev": "vite --port 5178",
     "typecheck": "tsc -b",
     "build": "tsc -b && vite build",
-    "test": "corepack pnpm --dir ../.. exec vitest apps/SIGNBRIDGE AI/src",
-    "test:run": "corepack pnpm --dir ../.. exec vitest run apps/SIGNBRIDGE AI/src",
+    "test": "corepack pnpm --dir ../.. exec vitest apps/signbridge-ai/src",
+    "test:run": "corepack pnpm --dir ../.. exec vitest run apps/signbridge-ai/src",
     "preview": "vite preview --port 5178"
   },
   "dependencies": {

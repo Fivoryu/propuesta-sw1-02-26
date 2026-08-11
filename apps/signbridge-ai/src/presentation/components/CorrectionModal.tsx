@@ -1,7 +1,7 @@
 import { X, CheckCircle2 } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@propuestas/ui'
-import { correctionOptions } from '../../data/mockSigns'
+import { correctionOptions } from '../../services/mock/sign-fixtures'
 import { useRecognitionStore } from '../../stores/recognitionStore'
 import { cn } from '../../utils/cn'
 

@@ -1,5 +1,5 @@
 import { ChevronDown } from 'lucide-react'
-import { vocabularies } from '../../data/mockSigns'
+import { vocabularies } from '../../services/mock/sign-fixtures'
 import { useRecognitionStore } from '../../stores/recognitionStore'
 
 export function VocabularySelector() {

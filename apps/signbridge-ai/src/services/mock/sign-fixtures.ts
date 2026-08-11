@@ -1,4 +1,4 @@
-import type { MockSign, Vocabulary } from '../types'
+import type { MockSign, Vocabulary } from '../../types'
 
 const receptionSigns: MockSign[] = [
   { text: 'Necesito ayuda', confidence: 0.94, description: 'Mano abierta a la altura del pecho, movimiento hacia adelante.' },
@@ -118,4 +118,11 @@ export const uncertainAlternatives: Record<string, Array<{ text: string; confide
     { text: 'Necesito información', confidence: 0.19 },
     { text: 'Por favor', confidence: 0.09 },
   ],
+}
+
+export const recognitionScenarioSigns: Record<string, MockSign | null> = {
+  'sign-success-high': { ...greetingsSigns[0] },
+  'sign-low-confidence': { text: 'Gracias', confidence: 0.72, description: 'Mano abierta desde la barbilla hacia adelante.' },
+  'sign-duplicate': { ...receptionSigns[0] },
+  'sign-no-match': null,
 }

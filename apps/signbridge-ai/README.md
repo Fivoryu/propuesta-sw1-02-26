@@ -17,19 +17,19 @@ pnpm dev:signbridge
 O directamente desde esta carpeta:
 
 ```bash
-cd "apps/SIGNBRIDGE AI"
+cd apps/signbridge-ai
 pnpm install
 pnpm dev
 ```
 
-La app estará disponible en: **http://localhost:5178**
+La app estará disponible en: **<http://localhost:5178>**
 
 ---
 
 ## Funciones REALES del prototipo
 
 | Función | Estado |
-|---|---|
+| --- | --- |
 | Acceso a cámara web (`getUserMedia`) | ✅ Real |
 | Navegación entre pantallas | ✅ Real |
 | Text-to-Speech (`speechSynthesis`) | ✅ Real |
@@ -40,7 +40,7 @@ La app estará disponible en: **http://localhost:5178**
 ## Funciones SIMULADAS del prototipo
 
 | Función | Estado |
-|---|---|
+| --- | --- |
 | Detección de manos | 🔵 Simulada |
 | Clasificación de señas por IA | 🔵 Simulada |
 | Nivel de confianza del modelo | 🔵 Simulada |

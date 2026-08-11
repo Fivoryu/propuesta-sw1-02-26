@@ -4,7 +4,7 @@ import { Button } from '@propuestas/ui'
 import { CameraView } from '../components/CameraView'
 import { ConfidenceBadge } from '../components/ConfidenceBadge'
 import { ProcessingSpinner } from '../components/StatusIndicator'
-import { practiceSignList } from '../../data/mockSigns'
+import { practiceSignList } from '../../services/mock/sign-fixtures'
 import type { MockSign, ConfidenceLevel } from '../../types'
 
 type PracticePhase = 'idle' | 'ready' | 'analyzing' | 'success' | 'retry'
