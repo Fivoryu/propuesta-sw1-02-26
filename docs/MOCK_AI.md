@@ -220,16 +220,58 @@ analyzeFoodMock(
 
 El servicio devuelve alimentos clonados para que la corrección de una porción no modifique el fixture. Los escenarios `food-low-confidence`, `food-duplicate` y `food-no-match` conservan el payload demostrativo y cambian el estado para que el contrato pueda ejercitar cada camino. Un escenario desconocido, incluido `food-error`, devuelve `MOCK_ANALYSIS_UNAVAILABLE` sin presentar datos nutricionales como válidos.
 
+## 6. SignBridge AI (signbridge-ai)
+
+## recognizeSign
+
+### Signature
+
+```ts
+recognizeSign(
+  input?: RecognizeSignInput,
+  options?: MockOptions,
+): Promise<RecognizeSignResult>;
+```
+
+### Example input
+
+```json
+{
+  "vocabularyId": "greetings",
+  "scenarioId": "sign-success-high"
+}
+```
+
+### Example output
+
+```json
+{
+  "scenarioId": "sign-success-high",
+  "status": "success",
+  "latencyMs": 1700,
+  "disclaimer": "simulated",
+  "sign": {
+    "text": "Hola",
+    "confidence": 0.96,
+    "description": "Mano abierta a la altura de la sien, pequeño movimiento de saludo."
+  },
+  "alternatives": []
+}
+```
+
+The service clones sign and alternative fixtures on every response. `sign-low-confidence` returns alternatives for manual review, `sign-duplicate` returns a recognized fixture with the duplicate status, and `sign-no-match` returns no usable sign so the presentation can show its existing retry state. `sign-error` and unknown scenarios return `MOCK_RECOGNITION_UNAVAILABLE` without a recognition payload.
+
 ## Scenario Matrix
 
 Each service exposes the same status vocabulary with product-specific meaning. The matrix must be reachable through named fixtures so the presentation and automated tests can exercise every path.
 
 | Service | Success | Low confidence | Duplicate | No match | Error |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | `analyzeUrbanIssue` | `urban-success-high`: classifies a fixture issue with confidence `0.92`. | `urban-low-confidence`: returns an ambiguous category and `suggestedCorrections`. | `urban-duplicate`: returns one or more similar local report fixtures. | `urban-no-match`: returns no comparable local fixture and an unresolved classification; absence is not proof of no real issue. | `urban-error`: returns `MOCK_ANALYSIS_UNAVAILABLE`; draft remains editable. |
 | `recognizeEquation` | `equation-success-high`: returns a normalized expression with confidence `0.96`. | `equation-low-confidence`: marks ambiguous tokens and requires correction. | `equation-duplicate`: indicates that the normalized expression already exists in the local notebook. | `equation-no-match`: returns no parseable equation for the selected fixture. | `equation-error`: returns `MOCK_RECOGNITION_UNAVAILABLE`; typed input remains. |
 | `findPetMatches` | `pet-success-ranked`: returns ranked fictional candidates with reasons. | `pet-low-confidence`: returns candidates whose traits are insufficient for a confident review. | `pet-duplicate`: indicates a similar local lost/found profile. | `pet-no-match`: returns an empty candidate list and broadening guidance. | `pet-error`: returns `MOCK_MATCHING_UNAVAILABLE`; safe profile fields remain. |
 | `analyzeFoodMock` | `food-success-high`: returns cloned foods and estimated macronutrients. | `food-low-confidence`: marks the simulated result for human review. | `food-duplicate`: signals a repeated local analysis scenario. | `food-no-match`: signals that no comparable food result was found in the fixture. | `food-error`: returns `MOCK_ANALYSIS_UNAVAILABLE`; no nutritional payload is presented. |
+| `recognizeSign` | `sign-success-high`: returns a cloned sign with high confidence. | `sign-low-confidence`: returns a possible sign and alternatives for review. | `sign-duplicate`: returns a fixture sign with duplicate status. | `sign-no-match`: returns no usable sign and preserves the retry path. | `sign-error`: returns `MOCK_RECOGNITION_UNAVAILABLE`; no recognition payload is presented. |
 
 ## Result Shapes
 

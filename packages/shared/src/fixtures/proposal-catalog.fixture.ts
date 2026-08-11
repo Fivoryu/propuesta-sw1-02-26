@@ -186,7 +186,54 @@ export const proposalCatalog: readonly Proposal[] = [
       dificultadTecnica: { score: 4, note: 'Flujo móvil y datos nutricionales' },
       iaFutura: { score: 5, note: 'Visión nutricional supervisada' },
     },
-    accent: 'amber',
-    appUrlEnvVar: 'VITE_NUTRIVISION_APP_URL',
-  },
-]
+        accent: 'amber',
+        appUrlEnvVar: 'VITE_NUTRIVISION_APP_URL',
+      },
+      {
+        id: 'signbridge-ai',
+        name: 'SignBridge AI',
+        shortName: 'SignBridge',
+        category: 'Accesibilidad e inclusión',
+        eyebrow: 'Lenguaje de señas',
+        summary:
+          'Un puente de comunicación que simula el reconocimiento de señas y las convierte en texto y voz para una revisión accesible.',
+        problem:
+          'Las personas sordas o con limitaciones auditivas pueden encontrar barreras al comunicarse con personas oyentes cuando no comparten una lengua de señas.',
+        beneficiaries: [
+          'Personas sordas o con limitaciones auditivas',
+          'Personas oyentes que necesitan comunicarse de forma más accesible',
+          'Instituciones educativas y espacios de atención al público',
+        ],
+        primaryFunction:
+          'Usar la cámara, un vocabulario de señas y una clasificación simulada para mostrar una interpretación en texto, reproducirla en voz y permitir correcciones locales.',
+        quality:
+          'Prioriza controles claros, estados de confianza visibles, acceso a cámara explicado y una corrección manual antes de presentar una interpretación como útil.',
+        productivity:
+          'Agiliza intercambios breves dentro de vocabularios curados, sin prometer precisión constante ni ahorro de tiempo medido.',
+        innovation:
+          'Combina reconocimiento visual simulado, voz y corrección humana para que la asistencia sea revisable en lugar de presentarse como una traducción automática definitiva.',
+        monetization:
+          'Hipótesis futura: licencias institucionales para educación o atención al público, sujetas a validación con comunidades usuarias, intérpretes y criterios de accesibilidad.',
+        prototypeLimits:
+          'La clasificación, la confianza y las métricas son simuladas; el vocabulario es curado, el historial es local y no reemplaza a intérpretes profesionales ni ofrece traducción general.',
+        futureDirection:
+          'Una futura versión podría evaluar modelos de reconocimiento de lengua de señas, vocabularios regionales y herramientas de revisión con participación de la comunidad antes de operar en contextos reales.',
+        technologies: ['React + TypeScript', 'Acceso a cámara del navegador', 'Text-to-Speech local', 'Mock determinista y estado local'],
+        flow: [
+          'Elegir un vocabulario y permitir el acceso a la cámara',
+          'Realizar una seña o usar los controles de demostración',
+          'Revisar el texto, la confianza y las alternativas simuladas',
+          'Reproducir la voz, confirmar el resultado o registrar una corrección local',
+        ],
+        criteria: {
+          calidad: { score: 4, note: 'Estados de confianza y corrección visibles' },
+          productividad: { score: 3, note: 'Agiliza frases de vocabulario curado' },
+          innovacion: { score: 5, note: 'Asistencia visual y voz revisable' },
+          monetizacion: { score: 3, note: 'Licenciamiento institucional por validar' },
+          dificultadTecnica: { score: 5, note: 'Cámara, reconocimiento y accesibilidad' },
+          iaFutura: { score: 5, note: 'Reconocimiento contextual supervisado' },
+        },
+        accent: 'rose',
+        appUrlEnvVar: 'VITE_SIGNBRIDGE_AI_APP_URL',
+      },
+    ]

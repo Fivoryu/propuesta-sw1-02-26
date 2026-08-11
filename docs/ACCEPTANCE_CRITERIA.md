@@ -77,6 +77,19 @@ These criteria are the implementation-phase exit contract for the academic porta
 - [ ] El error `MOCK_ANALYSIS_UNAVAILABLE` no presenta datos nutricionales como válidos ni afirma una predicción real.
 - [ ] La interfaz no afirma consejo médico, modelo de IA real, sincronización remota ni persistencia entre dispositivos.
 
+## SignBridge AI
+
+- [ ] La persona puede elegir un vocabulario, solicitar la cámara o recorrer el reconocimiento con controles de demostración.
+- [ ] `recognizeSign` devuelve resultados deterministas con `scenarioId`, estado, latencia, disclaimer y payload clonado.
+- [ ] La matriz del mock cubre `sign-success-high`, `sign-low-confidence`, `sign-duplicate`, `sign-no-match` y `sign-error` con latencia `0` en tests.
+- [ ] La carga muestra `Analizando seña...`, evita solicitudes duplicadas y conserva la navegación local.
+- [ ] El resultado reconocido muestra texto, confianza, vocabulario y la acción `Reproducir voz` sin presentarse como traducción general.
+- [ ] El resultado de baja confianza muestra alternativas y ofrece `Corregir` antes de confirmar.
+- [ ] La corrección manual registra una entrada local y la identifica como corregida.
+- [ ] Los estados sin coincidencia y error ofrecen `Intentar nuevamente` sin presentar un payload incompleto como válido.
+- [ ] El historial local permite revisar, reproducir y eliminar entradas sin backend ni contacto externo.
+- [ ] La interfaz mantiene el aviso de que SignBridge AI es una herramienta de apoyo y no reemplaza a intérpretes profesionales.
+
 ## Cross-App Navigation and Runtime
 
 - [ ] Each app has its own Vite entry, router, and independently runnable development command after implementation.

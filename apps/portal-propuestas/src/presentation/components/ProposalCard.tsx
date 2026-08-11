@@ -15,6 +15,7 @@ const accentClasses: Record<Proposal["accent"], string> = {
 	cobalt: "bg-[#2457D6]/10 text-[#2457D6]",
 	violet: "bg-[#7257D9]/10 text-[#7257D9]",
 	amber: "bg-[#B45309]/10 text-[#B45309]",
+	rose: "bg-[#BE123C]/10 text-[#BE123C]",
 };
 
 export function ProposalCard({

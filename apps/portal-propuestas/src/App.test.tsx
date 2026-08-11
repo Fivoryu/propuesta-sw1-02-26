@@ -17,17 +17,18 @@ function renderPortal(initialEntry = "/") {
 }
 
 describe("Portal de Propuestas main flow", () => {
-	it("renders all four cards and reaches each proposal detail and app entry action", async () => {
+	it("renders all five cards and reaches each proposal detail and app entry action", async () => {
 		const user = userEvent.setup();
 		renderPortal();
 
-		expect(screen.getAllByRole("link", { name: "Ver ficha" })).toHaveLength(4);
+		expect(screen.getAllByRole("link", { name: "Ver ficha" })).toHaveLength(5);
 
 		for (const proposalName of [
 			"Mejora Mi Barrio",
 			"Cuaderno Matemático",
 			"Encuentra Mi Mascota",
 			"NutriVision",
+			"SignBridge AI",
 		]) {
 			const detailLinks = screen.getAllByRole("link", { name: "Ver ficha" });
 			const proposalIndex = [
@@ -35,6 +36,7 @@ describe("Portal de Propuestas main flow", () => {
 				"Cuaderno Matemático",
 				"Encuentra Mi Mascota",
 				"NutriVision",
+				"SignBridge AI",
 			].indexOf(proposalName);
 			await user.click(detailLinks[proposalIndex]);
 
