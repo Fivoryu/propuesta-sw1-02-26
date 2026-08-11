@@ -2,7 +2,8 @@ export type ProposalId =
 	| "mejora-mi-barrio"
 	| "cuaderno-matematico"
 	| "encuentra-mi-mascota"
-	| "nutrivision";
+	| "nutrivision"
+	| "signbridge-ai";
 
 export type ProposalCriterionKey =
 	| "calidad"
@@ -36,6 +37,6 @@ export type Proposal = {
 	technologies: string[];
 	flow: string[];
 	criteria: Record<ProposalCriterionKey, ProposalCriterion>;
-	accent: "teal" | "cobalt" | "violet" | "amber";
+	accent: "teal" | "cobalt" | "violet" | "amber" | "rose";
 	appUrlEnvVar: string;
 };

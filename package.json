@@ -11,6 +11,7 @@
     "dev:cuaderno": "corepack pnpm --filter @propuestas/cuaderno-matematico dev",
     "dev:mascota": "corepack pnpm --filter @propuestas/encuentra-mi-mascota dev",
     "dev:nutrivision": "corepack pnpm --filter @propuestas/nutrivision dev",
+    "dev:signbridge": "corepack pnpm --filter @propuestas/signbridge-ai dev",
     "test": "vitest",
     "test:run": "vitest run",
     "typecheck": "tsc -b",

@@ -9,7 +9,7 @@ The design system provides an implementation-ready visual and interaction contra
 Use a 4 px base scale and semantic token names. Avoid arbitrary values in product screens.
 
 | Token | Value | Typical use |
-|---|---:|---|
+| --- | ---: | --- |
 | `space-1` | 4 px | icon-to-label gap, compact metadata |
 | `space-2` | 8 px | control internals, badge padding |
 | `space-3` | 12 px | field groups, card metadata |
@@ -26,7 +26,7 @@ Default page padding is 16 px on small screens and 24-32 px on larger screens. C
 Use a readable sans-serif stack: `Plus Jakarta Sans, ui-sans-serif, system-ui, sans-serif`. A display face may be added per product only when it preserves legibility and does not require an external service. Visible UI copy is Spanish; technical identifiers remain English.
 
 | Role | Size / line height | Weight | Use |
-|---|---:|---:|---|
+| --- | ---: | ---: | --- |
 | Display | 48 / 56 px | 700 | portal hero or product landing headline |
 | Heading 1 | 36 / 44 px | 700 | page title |
 | Heading 2 | 28 / 36 px | 700 | major section |
@@ -41,7 +41,7 @@ On screens below 480 px, reduce Display to 36 / 44 px and Heading 1 to 30 / 38 p
 ### Radii and Elevation
 
 | Token | Value | Typical use |
-|---|---:|---|
+| --- | ---: | --- |
 | `radius-sm` | 8 px | inputs, compact controls |
 | `radius-md` | 12 px | cards, banners, buttons |
 | `radius-lg` | 16 px | feature cards, result panels |
@@ -61,21 +61,26 @@ Avoid shadows as the only way to communicate grouping. Borders, spacing, heading
 Colors are semantic tokens. Product screens should consume theme tokens rather than hard-coded hex values. Contrast must be checked for every text/background pair.
 
 | Product | Primary | Accent | Surface | Text | Visual language |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | Academic portal | `#273469` deep indigo | `#E2A93B` academic gold | `#F7F5F0` warm paper | `#182033` ink | editorial, structured, evidence-oriented |
 | Mejora Mi Barrio | `#0E7C66` civic teal | `#E76F51` alert coral | `#F2F7F4` soft green | `#17332D` forest ink | civic, optimistic, grounded, map-adjacent |
 | Cuaderno Matemático | `#2457D6` cobalt | `#F4C95D` chalk yellow | `#F6F8FC` cool paper | `#17213B` navy ink | focused, geometric, study-friendly |
 | Encuentra Mi Mascota | `#7257D9` violet | `#F18F6A` warm peach | `#FFF8F2` cream | `#2B2230` plum ink | warm, caring, approachable, photo-led |
 | NutriVision | `#2F9E44` | `#F59F00` | `#FBFDF8` | `#1C2B22` | natural, analytical, mobile-first, food-led |
+| SignBridge AI | `#0E7490` | `#F59E0B` | `#F5FAFC` | `#152A33` | accesible, claro, humano, orientado a la comunicación |
 
 Each theme also needs semantic colors independent of product identity: success `#147D64`, warning `#A46600`, error `#B42318`, info `#1769AA`, and neutral `#5B6472`. Pair them with an icon and text label; never communicate status with color alone.
+
+## 6. SignBridge AI (signbridge-ai)
+
+SignBridge AI usa una identidad azul petróleo con un acento ámbar para comunicar claridad, confianza y revisión humana. `#0E7490` es el primario de navegación y acción; `#F59E0B` acompaña advertencias y estados de revisión; `#F5FAFC` mantiene una superficie luminosa y `#152A33` sostiene el contraste del texto.
 
 ## Controls and Components
 
 ### Button Contract
 
 | Size | Height | Minimum width | Use |
-|---|---:|---:|---|
+| --- | ---: | ---: | --- |
 | Small | 40 px | 88 px | secondary actions and dense toolbars |
 | Medium | 48 px | 120 px | default action |
 | Large | 56 px | 160 px | primary mobile action or hero CTA |
@@ -101,7 +106,7 @@ Components accept content and status as props. They do not own product wording, 
 Every interactive component must define and test the states that apply to it:
 
 | State | Required behavior |
-|---|---|
+| --- | --- |
 | Default | Clear affordance and Spanish label. |
 | Hover | Subtle visual response that does not change layout. |
 | Focus-visible | High-contrast outline, never removed with `outline: none`. |

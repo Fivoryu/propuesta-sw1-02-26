@@ -1,6 +1,6 @@
 # Frontend Monorepo Architecture
 
-The repository is a pnpm workspace containing four independently runnable Vite + React + TypeScript strict applications and three shared packages. The architecture is frontend-only by design: local fixtures and deterministic mock services provide the behavior needed for a high-fidelity proposal presentation. Phase 1 documentation is complete before implementation begins.
+The repository is a pnpm workspace containing five independently runnable Vite + React + TypeScript strict applications and three shared packages. The architecture is frontend-only by design: local fixtures and deterministic mock services provide the behavior needed for a high-fidelity proposal presentation. Phase 1 documentation is complete before implementation begins.
 
 ## Definitive Target Tree
 
@@ -50,6 +50,14 @@ The following is the proposed implementation tree. It is a target contract, not 
 │       │   ├── state/                # local session state
 │       │   └── main.tsx
 │       └── package.json
+│   └── signbridge-ai/
+│       ├── src/
+│       │   ├── hooks/                # camera and speech browser integrations
+│       │   ├── presentation/         # routes, pages, and recognition UI
+│       │   ├── services/mock/        # recognizeSign and local fixtures
+│       │   ├── stores/               # local recognition and history state
+│       │   └── types/                # app-owned recognition contracts
+│       └── package.json
 ├── packages/
 │   ├── ui/
 │   │   ├── src/components/           # shared accessible visual primitives
@@ -82,7 +90,7 @@ The following is the proposed implementation tree. It is a target contract, not 
 ## Architectural Decisions
 
 | Decision | Rationale | Boundary |
-|---|---|---|
+| --- | --- | --- |
 | pnpm workspace | Provides one dependency graph and repeatable workspace commands while preserving app isolation. | No app imports another app. |
 | Vite + React + TypeScript strict | Fits fast frontend prototyping and catches contract mistakes before presentation. | Strictness applies to app and shared package source. |
 | Local-first behavior | The proposal must be runnable without backend credentials, network access, or paid services. | Mock data is not production data. |
@@ -94,12 +102,13 @@ The following is the proposed implementation tree. It is a target contract, not 
 ## Application Responsibilities
 
 | App | Responsibilities | Must not own |
-|---|---|---|
+| --- | --- | --- |
 | `portal-propuestas` | Proposal catalog, comparison view, proposal detail pages, and links into the presentation flows. | Product domain rules for the three product apps. |
 | `mejora-mi-barrio` | Report draft, approximate location, category correction, duplicate review, and urban-analysis result rendering. | Municipal submission, live maps, or a real classifier. |
 | `cuaderno-matematico` | Equation input, recognition review, correction, notebook presentation, and equation-specific validation. | General-purpose OCR, grading, or a real solver service. |
 | `encuentra-mi-mascota` | Lost/found profile form, candidate ranking presentation, duplicate review, and safe next-step preview. | Live contact exchange, identity verification, or a real image search service. |
 | `nutrivision` | Profile setup, orientative nutrition goals, food-analysis review, manual corrections, meal registration, and local history. | Medical advice, a real vision model, backend persistence, or synchronized nutrition records. |
+| `signbridge-ai` | Vocabulary selection, camera and speech controls, simulated sign recognition, correction, practice, local history, and demonstration metrics. | General translation, professional interpretation, a real recognition model, backend persistence, or stored video. |
 
 ## Shared Package Responsibilities
 
@@ -141,10 +150,10 @@ shared contracts + deterministic fixtures/runtime
 ```
 
 | Layer | Contains | Does not contain |
-|---|---|---|
+| --- | --- | --- |
 | UI and presentation | Routes, pages, form controls, loading and recovery views, view-model mapping, Spanish visible copy. | Fetch calls, fixture selection rules, or hidden product decisions. |
 | Simulated domain | Draft state, validation, correction, duplicate decisions, and result interpretation. | React-specific rendering details or external service credentials. |
-| Mock services | `analyzeUrbanIssue`, `recognizeEquation`, and `findPetMatches` adapters, controlled delay, deterministic scenario outcomes. | A claim that a model or backend exists. |
+| Mock services | `analyzeUrbanIssue`, `recognizeEquation`, `findPetMatches`, `analyzeFoodMock`, and `recognizeSign` adapters, controlled delay, deterministic scenario outcomes. | A claim that a model or backend exists. |
 
 Presentation may call a domain use case. A domain use case may call a typed mock adapter. No component calls `fetch`, reads an environment secret, or reaches into another app.
 
@@ -162,12 +171,13 @@ Presentation may call a domain use case. A domain use case may call a typed mock
 Each app owns its router and has a direct-entry route map:
 
 | App | Core routes |
-|---|---|
+| --- | --- |
 | Portal | `/`, `/propuestas/mejora-mi-barrio`, `/propuestas/cuaderno-matematico`, `/propuestas/encuentra-mi-mascota` |
 | Barrio | `/`, `/reportar`, `/reportes/resumen` |
 | Cuaderno | `/`, `/practicar`, `/cuaderno` |
 | Mascota | `/`, `/publicar`, `/buscar`, `/coincidencias` |
 | NutriVision | `/`, `/profile-setup`, `/goal`, `/home`, `/camera`, `/processing`, `/analysis`, `/nutrition-result`, `/success`, `/history`, `/meal/:id`, `/profile` |
+| SignBridge AI | `/`, `/recognition`, `/practice`, `/history`, `/admin` |
 
 Routes are names for the implementation phase and may add an identifier segment when a view needs one. Navigation should use the app router, not hard-coded full URLs between apps. The portal links to an app entry URL supplied by the presentation environment.
 
@@ -175,9 +185,42 @@ Global state is intentionally limited to each app: a small reducer or equivalent
 
 ## Independent Execution and Optional Services
 
-Every app must be startable and built independently from the workspace after implementation, using its own Vite entry and only the shared packages it needs. The portal must not be required to run `mejora-mi-barrio`, and a product app must not require the portal.
+Every app must be startable and built independently from the workspace after implementation, using its own Vite entry and only the shared packages it needs. The portal must not be required to run a product app, and a product app must not require the portal.
 
 External services are optional because the proposal is evaluated as a frontend prototype. If a future adapter is configured, the application still falls back to the local mock adapter when credentials, network access, or the service are unavailable. That fallback must expose a visible degraded or simulated state; it must not silently present external failure as a successful real-world operation.
+
+## 6. SignBridge AI (signbridge-ai)
+
+### Application Responsibilities
+
+| App | Responsibilities | Must not own |
+|---|---|---|
+| `signbridge-ai` | Selección de vocabulario, acceso a cámara, reconocimiento simulado, texto y voz, corrección manual, práctica, historial local y métricas de demostración. | Traducción general, interpretación profesional, un modelo real, backend, autenticación o almacenamiento de video. |
+
+### Routing and State
+
+| Area | Definition |
+| --- | --- |
+| Routes | `/`, `/recognition`, `/practice`, `/history` y `/admin`; cada ruta es directa dentro de la aplicación Vite. |
+| Recognition state | Zustand mantiene fase, resultado actual, alternativas, vocabulario seleccionado, manos detectadas e historial local. |
+| Mock boundary | `src/services/mock/recognize-sign.ts` controla escenarios, latencia, cancelación y payloads clonados; la presentación no selecciona fixtures directamente. |
+| Browser boundary | `useCamera` y `useSpeech` encapsulan `getUserMedia` y `speechSynthesis`; ninguna integración implica un servicio remoto. |
+
+### Definitive Target Tree
+
+```text
+apps/signbridge-ai/
+├── src/
+│   ├── hooks/                  # camera and speech browser integrations
+│   ├── presentation/           # routes, pages, and recognition UI
+│   ├── services/mock/          # recognizeSign and local fixtures
+│   ├── stores/                 # local recognition and history state
+│   ├── types/                  # app-owned recognition contracts
+│   └── main.tsx
+├── index.html
+├── package.json
+└── vite.config.ts
+```
 
 ## Phase Boundary
 

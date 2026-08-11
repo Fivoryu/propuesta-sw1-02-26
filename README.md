@@ -83,12 +83,13 @@ corepack pnpm --filter @propuestas/mejora-mi-barrio build
 Apps are independent and can run without another app being available:
 
 | App | Command | Port |
-|---|---|---:|
+| --- | --- | ---: |
 | Portal de Propuestas | `corepack pnpm dev:portal` | 5173 |
 | Mejora Mi Barrio | `corepack pnpm dev:barrio` | 5174 |
 | Cuaderno Matemático | `corepack pnpm dev:cuaderno` | 5175 |
 | Encuentra Mi Mascota | `corepack pnpm dev:mascota` | 5176 |
 | NutriVision | corepack pnpm dev:nutrivision | 5177 |
+| SignBridge AI | corepack pnpm dev:signbridge | 5178 |
 
 The portal falls back to `/` for prototype links. To run the three product apps in parallel and link to their local ports, create `apps/portal-propuestas/.env.local` with:
 
@@ -97,6 +98,7 @@ VITE_MEJORA_MI_BARRIO_APP_URL=http://localhost:5174/
 VITE_CUADERNO_MATEMATICO_APP_URL=http://localhost:5175/
 VITE_ENCUENTRA_MI_MASCOTA_APP_URL=http://localhost:5176/
 VITE_NUTRIVISION_APP_URL=http://localhost:5177/
+VITE_SIGNBRIDGE_AI_APP_URL=http://localhost:5178/
 ```
 
 ## Repository Structure

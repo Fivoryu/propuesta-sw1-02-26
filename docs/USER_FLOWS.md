@@ -5,7 +5,7 @@ These flows define what the presentation must demonstrate. All visible copy is S
 ## State Vocabulary
 
 | State | Meaning in the prototype |
-|---|---|
+| --- | --- |
 | Loading | A controlled mock delay is active; submission is disabled to prevent duplicate requests. |
 | Empty | No local content or candidates are available yet. |
 | Low confidence | The mock result is usable only after the user reviews or corrects it. |
@@ -124,6 +124,28 @@ These flows define what the presentation must demonstrate. All visible copy is S
 4. **Error**: Si el escenario del mock no está disponible, el servicio devuelve `No pudimos analizar la comida. Tu imagen sigue en la demostración.` con un resultado local de error; no se presenta como una estimación válida.
 5. **Disclaimer**: Las vistas de procesamiento, análisis y resultado mantienen mensajes como `Esta demostración usa datos simulados; no es una predicción real.` y `Detección visual simulada`.
 6. **History**: `/history` permite revisar comidas locales de hoy y de ayer; no implica sincronización, persistencia remota ni seguimiento clínico.
+
+## 6. SignBridge AI (signbridge-ai)
+
+### Primary flow: reconocer una seña
+
+1. **Inicio**: La persona abre `/` y conoce SignBridge AI antes de entrar a `Iniciar reconocimiento`.
+2. **Vocabulario**: En `/recognition`, selecciona un vocabulario como `Recepción y orientación`, `Saludos` o `Preguntas básicas`.
+3. **Cámara**: La persona elige `Permitir cámara`; el navegador solicita el permiso y la vista muestra el estado de la cámara. Los controles de demostración siguen disponibles para recorrer el flujo sin una cámara real.
+4. **Carga**: Al elegir `Simular éxito`, la interfaz muestra `Analizando seña...` durante el retraso controlado del mock y desactiva los controles de simulación.
+5. **Resultado**: El panel muestra `Seña reconocida`, el texto, la confianza y el vocabulario activo. La persona puede usar `Reproducir voz`, `Confirmar` o `Repetir`.
+6. **Confirmación**: `Confirmar` guarda la interpretación únicamente en el historial local de la sesión y devuelve el panel a `Esperando reconocimiento`.
+
+### Recovery flow: revisar, corregir o reintentar
+
+1. **Empty**: Antes de la primera interpretación, el resultado muestra `Esperando reconocimiento` y explica que se puede realizar una seña o usar los controles de simulación.
+2. **Low confidence**: `Simular incertidumbre` muestra `Resultado posible`, una confianza media y alternativas con `Ver alternativas`; la persona puede abrir `Corregir` antes de confirmar.
+3. **Correction**: El modal `¿Cuál era la seña correcta?` permite elegir una opción, confirmar con `Confirmar corrección` y registra el texto corregido como una entrada local.
+4. **No match**: El escenario `sign-no-match` no entrega una seña utilizable y la presentación conserva el estado `No pudimos reconocer la seña`, con consejos para repetir la captura.
+5. **Duplicate**: El escenario `sign-duplicate` conserva una interpretación simulada con el estado de duplicado en el contrato del mock; la interfaz actual no agrega una decisión externa ni crea registros remotos.
+6. **Error**: `Simular error` muestra `No pudimos reconocer la seña` y ofrece `Intentar nuevamente`; no se presenta un resultado incompleto como válido.
+7. **Cancel**: `Pausar cámara`, `Reanudar cámara` y `Detener cámara` controlan la sesión local. Detenerla no afirma que se haya cancelado una operación externa.
+8. **History**: `Historial` muestra entradas reconocidas o corregidas, permite reproducirlas y mantiene el contenido en el almacenamiento local de la demostración.
 
 ## Cross-Flow Verification
 
