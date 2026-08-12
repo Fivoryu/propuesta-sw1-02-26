@@ -1,6 +1,6 @@
 # Shared Design System
 
-The design system provides an implementation-ready visual and interaction contract for the Spanish-language portal and three product prototypes. Shared primitives should feel related, while each product keeps a distinct identity. The system is mobile-first and targets WCAG 2.2 AA practices without claiming formal certification.
+The design system provides an implementation-ready visual and interaction contract for the Spanish-language portal and seven product prototypes. Shared primitives should feel related, while each product keeps a distinct identity. The system is mobile-first and targets WCAG 2.2 AA practices without claiming formal certification.
 
 ## Foundations
 
@@ -138,3 +138,10 @@ Every interactive component must define and test the states that apply to it:
 3. Make loading, empty, low-confidence, duplicate, error, correction, cancel, and confirmation states first-class layouts, not incidental text below a form.
 4. Prefer composition over product-specific forks of shared components.
 5. Test keyboard paths and narrow layouts as part of the component contract, not as a final visual polish step.
+## CanastaAI Visual Identity
+
+CanastaAI uses a warm consumer-finance palette: cream surfaces, dark olive brand color, charcoal text, restrained savings green and a warm alert accent. The UI is mobile-first with a persistent five-item bottom navigation and a slightly emphasized scan action. Monetary values are large and legible; lists are touch-friendly; comparison strategies use segmented controls instead of tables on small screens. The product avoids purple AI gradients, glass effects and administrative dashboard patterns.
+
+## ReciScan Visual Identity
+
+ReciScan uses recycled-paper off-white, deep forest green, charcoal text, muted stone surfaces and restrained amber/rust value accents. It avoids fluorescent green, repeated recycling symbols, childish eco gamification and generic environmental illustrations. The app feels like a local marketplace and gig-worker logistics tool: bottom navigation on mobile, clear mode switch, compact map/list surfaces, visible route grouping and strong quantity/value hierarchy.

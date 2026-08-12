@@ -1,6 +1,6 @@
 # Acceptance Criteria
 
-These criteria are the implementation-phase exit contract for the academic portal and three product prototypes. They are verifiable requirements, not evidence that the applications already exist. Phase 1 is complete when the six documentation files are present and readable; implementation must satisfy the remaining criteria without adding a backend, authentication, payment system, or real AI unless a later decision explicitly changes scope.
+These criteria are the implementation-phase exit contract for the academic portal and seven product prototypes. They are verifiable requirements; implementation must satisfy them without adding a backend, authentication, payment system, or real AI unless a later decision explicitly changes scope.
 
 ## Verification Rules
 
@@ -12,7 +12,7 @@ These criteria are the implementation-phase exit contract for the academic porta
 
 ## Portal: `portal-propuestas`
 
-- [ ] The landing route presents all three proposals and states the prototype boundary.
+- [ ] The landing route presents all seven proposals and states the prototype boundary.
 - [ ] Each proposal has a directly reachable detail route with problem, beneficiaries, primary function, quality target, innovation, monetization hypothesis, and limits.
 - [ ] The reviewer can move from the portal to each product entry route and return with browser back/forward.
 - [ ] Temporary comparison supports adding, removing, duplicate prevention, empty state, and confirmation feedback.
@@ -104,7 +104,7 @@ These criteria are the implementation-phase exit contract for the academic porta
 - [ ] Every control has a visible Spanish label or an equivalent accessible name, with helper and error text programmatically associated.
 - [ ] Keyboard users can reach, operate, and exit every control, dialog, confirmation sheet, and result action in a logical order.
 - [ ] Focus is visible, modal focus is managed, and focus returns to the triggering control after dismissal.
-- [ ] Loading, success, validation, low-confidence, duplicate, empty, and error changes are announced without relying on color alone.
+- [ ] Loading, success, validation, uncertainty, duplicate, empty, and error changes are announced without relying on color alone where applicable to each product flow.
 - [ ] Text and controls meet the contrast targets in `DESIGN_SYSTEM.md`.
 - [ ] The layout works at 360 px, 390 px, 768 px, 1024 px, and 1440 px without horizontal overflow.
 - [ ] Primary actions remain reachable on mobile, and two-column layouts collapse appropriately.
@@ -113,7 +113,7 @@ These criteria are the implementation-phase exit contract for the academic porta
 
 ## Tests
 
-- [ ] Unit tests cover each app's validation, correction, duplicate decision, and result-status mapping.
+- [ ] Unit and flow tests cover validation, correction, duplicate decisions, uncertainty states, and result-status mapping where applicable to each product flow.
 - [ ] Mock-service tests cover every scenario ID in the matrix, deterministic output, latency override, and cancellation behavior.
 - [ ] Shared component tests cover keyboard operation and all applicable visual states.
 - [ ] Flow tests cover the primary path and at least one recovery path for each app.
@@ -126,4 +126,34 @@ These criteria are the implementation-phase exit contract for the academic porta
 - [ ] Each app builds independently and the workspace build completes without importing unimplemented backend or external-service code.
 - [ ] Lint and formatting checks pass using the shared configuration package.
 - [ ] The six files in `docs/` remain readable, cross-reference the same app names and mock statuses, and contain no claim of a production backend, authentication, payment, or real AI.
-- [ ] Implementation begins only after this documentation set has been reviewed as the Phase 1 baseline.
+- [ ] Current documentation describes the implemented workspace and remains aligned with the official proposal set.
+## CanastaAI Acceptance Criteria
+
+- The app runs as `@propuestas/canasta-ai` and is linked from the portal catalog.
+- Mobile navigation exposes Inicio, Comparar, Escanear, Precios and Mi CanastaAI with Escanear visually emphasized.
+- The demo receipt can be selected, analyzed, shown as normalized product data, and confirmed with a community contribution message.
+- Basket quantity changes affect comparison totals, store subtotals and savings.
+- Recommended store subtotals sum to the recommended total, and savings equals usual total minus recommended total.
+- The weekly basket can change strategy between mayor ahorro, menor distancia and equilibrio, with deterministic tradeoffs.
+- Receipt correction can edit recognized output before confirmation.
+- The price explorer product selector and sorting filters change local data order.
+- Product detail uses product-specific history, percentage variation, safe empty states, minimum, average, maximum and a simulated price alert.
+- Basket recommendations display a simplified fixture-based travel estimate and do not claim real route optimization.
+- Mi CanastaAI includes profile, monthly savings, purchases, alerts and a route to CanastaAI Plus.
+- CanastaAI Plus compares free and Plus plans, shows a demonstrative Bs 14,90/month price and includes a premium feature preview.
+- All visible product text is Spanish and all AI/price data is clearly simulated.
+
+## ReciScan Acceptance Criteria
+
+- The app runs as `@propuestas/reciscan` and is linked from the portal catalog.
+- Mobile navigation exposes Inicio, Mercado, Escanear, Recolecciones and Mi ReciScan with Escanear emphasized.
+- The seller/recycler mode switch changes Home and profile content.
+- The demo scan reaches a PET result with confidence, condition, estimated quantity, reference price and reference value.
+- Publishing supports Vender, Gratis and Negociar and protects exact location copy.
+- Recycler matches appear only after publication, and profile/coordination actions open local simulated panels.
+- Mercado supports material filtering, text search, listing detail and simulated reservation.
+- Mercado distinguishes total nearby material from material included in the suggested route.
+- Recolecciones shows an ordered 1-2-3 route visualization, starts a simulated route and confirms collected weight separately from published quantity.
+- Mi ReciScan shows seller and recycler summaries according to mode.
+- ReciScan Pro exists with demonstrative Bs 19,90/month pricing and useful alert previews.
+- Hazardous materials are excluded from the prototype copy and all live capabilities are clearly mocked.

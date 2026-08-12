@@ -1,0 +1,28 @@
+{
+  "name": "@propuestas/reciscan",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5180",
+    "typecheck": "tsc -b",
+    "build": "tsc -b && vite build",
+    "test": "corepack pnpm --dir ../.. exec vitest apps/reciscan/src",
+    "test:run": "corepack pnpm --dir ../.. exec vitest run apps/reciscan/src",
+    "preview": "vite preview --port 5180"
+  },
+  "dependencies": {
+    "@propuestas/ui": "workspace:*",
+    "lucide-react": "^0.468.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.0"
+  }
+}

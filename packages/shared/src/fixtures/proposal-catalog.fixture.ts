@@ -236,4 +236,98 @@ export const proposalCatalog: readonly Proposal[] = [
         accent: 'rose',
         appUrlEnvVar: 'VITE_SIGNBRIDGE_AI_APP_URL',
       },
-    ]
+  {
+    id: 'canasta-ai',
+    name: 'CanastaAI',
+    shortName: 'CanastaAI',
+    category: 'Ahorro colaborativo',
+    eyebrow: 'Precios comunitarios',
+    summary:
+      'Un prototipo móvil para convertir tickets de compra en inteligencia colectiva de precios y recomendaciones de ahorro.',
+    problem:
+      'Las familias comparan precios con información incompleta, mensajes dispersos y visitas a tiendas que no siempre justifican el ahorro.',
+    beneficiaries: [
+      'Consumidores que planifican su canasta semanal',
+      'Familias que buscan ahorrar en compras recurrentes',
+      'Comunidades que aportan precios desde comprobantes',
+    ],
+    primaryFunction:
+      'Simular el análisis de un ticket, confirmar precios estructurados y comparar una canasta semanal entre tiendas cercanas.',
+    quality:
+      'Prioriza una experiencia móvil clara, montos legibles, estados de confirmación y datos demostrativos coherentes.',
+    productivity:
+      'Reduce la comparación manual de precios al ordenar tienda, distancia, frescura y ahorro esperado en una recomendación.',
+    innovation:
+      'Usa el ticket cotidiano como mecanismo de aporte comunitario y convierte precios recientes en decisiones de compra explicables.',
+    monetization:
+      'Hipótesis futura: CanastaAI Plus con canastas ilimitadas, alertas avanzadas e historial completo por Bs 14,90 al mes.',
+    prototypeLimits:
+      'No realiza OCR real, pagos, GPS en vivo ni integraciones con supermercados; todo es mock determinista local.',
+    futureDirection:
+      'Una futura versión podría validar comprobantes reales, ubicación autorizada, reputación de aportes y alertas personalizadas.',
+    technologies: ['React + TypeScript', 'Servicios mock deterministas', 'Diseño móvil-first', 'Datos locales de Santa Cruz'],
+    flow: [
+      'Escanear un ticket demostrativo',
+      'Revisar productos normalizados y confirmar precios',
+      'Comparar una canasta semanal por ahorro, distancia o equilibrio',
+      'Explorar precios comunitarios y conocer CanastaAI Plus',
+    ],
+    criteria: {
+      calidad: { score: 5, note: 'Flujo consumidor pulido y responsive' },
+      productividad: { score: 5, note: 'Ahorro y decisión en una vista' },
+      innovacion: { score: 4, note: 'Ticket como aporte colectivo' },
+      monetizacion: { score: 4, note: 'Plus demostrativo claro' },
+      dificultadTecnica: { score: 4, note: 'Estados, rutas y mocks coherentes' },
+      iaFutura: { score: 4, note: 'Reconocimiento de tickets revisable' },
+    },
+    accent: 'teal',
+    appUrlEnvVar: 'VITE_CANASTA_AI_APP_URL',
+  },
+  {
+    id: 'reciscan',
+    name: 'ReciScan',
+    shortName: 'ReciScan',
+    category: 'Economía circular',
+    eyebrow: 'Red de recuperación',
+    summary:
+      'Un marketplace móvil que hace visibles materiales reciclables para conectarlos con recolectores cercanos.',
+    problem:
+      'Muchos materiales con valor económico terminan descartados mientras recicladores independientes gastan tiempo buscando oportunidades dispersas.',
+    beneficiaries: [
+      'Personas y negocios con material reciclable',
+      'Recicladores independientes',
+      'Compradores y pequeños centros de acopio',
+    ],
+    primaryFunction:
+      'Simular clasificación de material, publicación segura, oportunidades cercanas, reservas y rutas agrupadas de recolección.',
+    quality:
+      'Distingue ubicación aproximada, cantidad estimada, peso confirmado y valor referencial sin exponer direcciones exactas.',
+    productivity:
+      'Agrupa oportunidades cercanas para reducir recorridos innecesarios y convertir publicaciones dispersas en rutas de trabajo.',
+    innovation:
+      'Combina escaneo simulado, marketplace local y ruta sugerida para conectar oferta invisible con recolectores activos.',
+    monetization:
+      'Hipótesis futura: ReciScan Pro para recolectores con alertas avanzadas, mayor radio y rutas sugeridas por Bs 19,90 al mes.',
+    prototypeLimits:
+      'No realiza visión por computadora real, chat en vivo, pagos, GPS, rutas reales ni backend de marketplace.',
+    futureDirection:
+      'Una versión real requeriría verificación de perfiles, reglas de seguridad, reputación, ubicación autorizada y datos de precios validados.',
+    technologies: ['React + TypeScript', 'Servicios mock deterministas', 'Diseño móvil-first', 'Mapa estático local'],
+    flow: [
+      'Escanear material PET demostrativo',
+      'Publicar con modalidad vender, gratis o negociar',
+      'Ver recicladores interesados y oportunidades cercanas',
+      'Reservar una publicación y revisar una ruta agrupada',
+    ],
+    criteria: {
+      calidad: { score: 5, note: 'Dos perspectivas claras y seguras' },
+      productividad: { score: 5, note: 'Ruta de trabajo desde oportunidades' },
+      innovacion: { score: 4, note: 'Recuperación local visible' },
+      monetizacion: { score: 4, note: 'Pro orientado a recolectores' },
+      dificultadTecnica: { score: 4, note: 'Estados, filtros y rutas mock' },
+      iaFutura: { score: 4, note: 'Clasificación visual revisable' },
+    },
+    accent: 'teal',
+    appUrlEnvVar: 'VITE_RECISCAN_APP_URL',
+  },
+]

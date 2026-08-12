@@ -19,7 +19,7 @@ These flows define what the presentation must demonstrate. All visible copy is S
 
 ### Primary flow: review a proposal
 
-1. **Landing**: The reviewer opens `/` and sees the academic portal title, three proposal cards, and the main action `Ver propuestas`.
+1. **Landing**: The reviewer opens `/` and sees the academic portal title, seven proposal cards, and the main action `Ver propuestas`.
 2. **Loading**: The shell may show a short skeleton while local catalog fixtures initialize. No network request is implied.
 3. **Select**: The reviewer opens one proposal card, for example `Mejora Mi Barrio`, and sees problem, beneficiaries, flow, quality target, and prototype boundary.
 4. **Compare**: The reviewer adds proposals to a temporary comparison view. A confirmation toast states `Propuesta agregada a la comparacion`.
@@ -150,3 +150,10 @@ These flows define what the presentation must demonstrate. All visible copy is S
 ## Cross-Flow Verification
 
 The implementation must be able to demonstrate at least one fixture for each result status in `MOCK_AI.md`, and every flow must expose a visible path to recover without refreshing the page. The portal may link to the apps, but each product flow must also be directly navigable and independently runnable.
+## CanastaAI Flows
+
+Primary flow: open Inicio, understand the savings promise, open Escanear, select the demo receipt, analyze it, review normalized items, confirm prices, open Comparar, adjust the weekly basket, select a strategy, view recommended stores and tradeoffs, open Precios, inspect nearby prices, open a product detail with trend, open Mi CanastaAI and then CanastaAI Plus. Recovery and alternate states include disabled analysis before selecting the demo ticket, editable detected receipt lines, strategy switching, simulated alert activation, and a Plus CTA message that identifies the payment flow as demonstrative.
+
+## ReciScan Flows
+
+Seller flow: open Inicio in Tengo material mode, scan the demo PET material, review classification, preparation recommendations, estimated quantity and reference value, choose Vender, publish, see interested recyclers and coordinate in a simulated safe conversation. Recycler flow: switch to Recolecto / compro, open Mercado, filter opportunities, open and reserve a listing, review a nearby opportunity group, open Recolecciones, start a 3-stop route, confirm one collected weight, open Mi ReciScan and ReciScan Pro.

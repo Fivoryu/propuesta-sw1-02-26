@@ -1,10 +1,10 @@
 # Frontend Monorepo Architecture
 
-The repository is a pnpm workspace containing five independently runnable Vite + React + TypeScript strict applications and three shared packages. The architecture is frontend-only by design: local fixtures and deterministic mock services provide the behavior needed for a high-fidelity proposal presentation. Phase 1 documentation is complete before implementation begins.
+The repository is a pnpm workspace containing eight independently runnable Vite + React + TypeScript strict applications: one academic portal and seven product proposal prototypes, plus three shared packages. The architecture is frontend-only by design: local fixtures and deterministic mock services provide the behavior needed for a high-fidelity proposal presentation.
 
-## Definitive Target Tree
+## Current Workspace Tree
 
-The following is the proposed implementation tree. It is a target contract, not a claim that these source files or manifests already exist.
+The following tree represents the current workspace structure and its main architectural responsibilities.
 
 ```text
 .
@@ -41,7 +41,7 @@ The following is the proposed implementation tree. It is a target contract, not 
 │   │   │   ├── services/mock/        # findPetMatches adapter
 │   │   │   └── main.tsx
 │   │   └── package.json
-│   └── nutrivision/
+│   ├── nutrivision/
 │       ├── src/
 │       │   ├── app/
 │       │   ├── presentation/
@@ -50,13 +50,30 @@ The following is the proposed implementation tree. It is a target contract, not 
 │       │   ├── state/                # local session state
 │       │   └── main.tsx
 │       └── package.json
-│   └── signbridge-ai/
+│   ├── signbridge-ai/
 │       ├── src/
 │       │   ├── hooks/                # camera and speech browser integrations
 │       │   ├── presentation/         # routes, pages, and recognition UI
 │       │   ├── services/mock/        # recognizeSign and local fixtures
 │       │   ├── stores/               # local recognition and history state
 │       │   └── types/                # app-owned recognition contracts
+│       └── package.json
+│   ├── canasta-ai/
+│   │   ├── src/
+│   │   │   ├── domain/               # basket comparison and price rules
+│   │   │   ├── fixtures/             # fictional grocery and store data
+│   │   │   ├── presentation/         # routes and consumer UI
+│   │   │   ├── services/mock/        # deterministic receipt and price adapters
+│   │   │   └── main.tsx
+│   │   └── package.json
+│   └── reciscan/
+│       ├── src/
+│       │   ├── domain/               # listing, reservation and collection rules
+│       │   ├── fixtures/             # fictional recyclable marketplace data
+│       │   ├── presentation/         # seller and recycler flows
+│       │   ├── services/mock/        # deterministic material and marketplace adapters
+│       │   ├── state/                # local ReciScan application state
+│       │   └── main.tsx
 │       └── package.json
 ├── packages/
 │   ├── ui/
@@ -103,12 +120,15 @@ The following is the proposed implementation tree. It is a target contract, not 
 
 | App | Responsibilities | Must not own |
 | --- | --- | --- |
-| `portal-propuestas` | Proposal catalog, comparison view, proposal detail pages, and links into the presentation flows. | Product domain rules for the three product apps. |
+| `portal-propuestas` | Proposal catalog, comparison view, proposal detail pages, and links into the presentation flows. | Product domain rules for the seven product apps. |
 | `mejora-mi-barrio` | Report draft, approximate location, category correction, duplicate review, and urban-analysis result rendering. | Municipal submission, live maps, or a real classifier. |
 | `cuaderno-matematico` | Equation input, recognition review, correction, notebook presentation, and equation-specific validation. | General-purpose OCR, grading, or a real solver service. |
 | `encuentra-mi-mascota` | Lost/found profile form, candidate ranking presentation, duplicate review, and safe next-step preview. | Live contact exchange, identity verification, or a real image search service. |
 | `nutrivision` | Profile setup, orientative nutrition goals, food-analysis review, manual corrections, meal registration, and local history. | Medical advice, a real vision model, backend persistence, or synchronized nutrition records. |
 | `signbridge-ai` | Vocabulary selection, camera and speech controls, simulated sign recognition, correction, practice, local history, and demonstration metrics. | General translation, professional interpretation, a real recognition model, backend persistence, or stored video. |
+
+| `canasta-ai`           | Receipt mock analysis, basket comparison, product-price history, travel estimate, and CanastaAI Plus preview.                                            | Real OCR, live supermarket integrations, payment, backend persistence, live GPS, or real route optimization.     |
+| `reciscan`             | Seller/recycler modes, material mock scan, marketplace publication, reservation, collection grouping, confirmation, and ReciScan Pro preview.                  | Real computer vision, live GPS, production routing, chat, payment, or backend marketplace infrastructure.        |
 
 ## Shared Package Responsibilities
 
@@ -153,7 +173,7 @@ shared contracts + deterministic fixtures/runtime
 | --- | --- | --- |
 | UI and presentation | Routes, pages, form controls, loading and recovery views, view-model mapping, Spanish visible copy. | Fetch calls, fixture selection rules, or hidden product decisions. |
 | Simulated domain | Draft state, validation, correction, duplicate decisions, and result interpretation. | React-specific rendering details or external service credentials. |
-| Mock services | `analyzeUrbanIssue`, `recognizeEquation`, `findPetMatches`, `analyzeFoodMock`, and `recognizeSign` adapters, controlled delay, deterministic scenario outcomes. | A claim that a model or backend exists. |
+| Mock services | `analyzeUrbanIssue`, `recognizeEquation`, `findPetMatches`, `analyzeFoodMock`, `recognizeSign`, receipt-analysis, and recyclable-classification adapters, controlled delay, deterministic scenario outcomes. | A claim that a model or backend exists. |
 
 Presentation may call a domain use case. A domain use case may call a typed mock adapter. No component calls `fetch`, reads an environment secret, or reaches into another app.
 
@@ -179,7 +199,7 @@ Each app owns its router and has a direct-entry route map:
 | NutriVision | `/`, `/profile-setup`, `/goal`, `/home`, `/camera`, `/processing`, `/analysis`, `/nutrition-result`, `/success`, `/history`, `/meal/:id`, `/profile` |
 | SignBridge AI | `/`, `/recognition`, `/practice`, `/history`, `/admin` |
 
-Routes are names for the implementation phase and may add an identifier segment when a view needs one. Navigation should use the app router, not hard-coded full URLs between apps. The portal links to an app entry URL supplied by the presentation environment.
+Routes reflect the current prototype structure and may add an identifier segment when a view needs one. Navigation should use the app router, not hard-coded full URLs between apps. The portal links to an app entry URL supplied by the presentation environment.
 
 Global state is intentionally limited to each app: a small reducer or equivalent local state holds the current draft, request lifecycle, correction, and confirmation. There is no cross-app global store. URL state is used for navigable views; transient UI state stays local. Shared components remain stateless unless they manage a short-lived interaction such as opening a dialog.
 
@@ -206,7 +226,7 @@ External services are optional because the proposal is evaluated as a frontend p
 | Mock boundary | `src/services/mock/recognize-sign.ts` controla escenarios, latencia, cancelación y payloads clonados; la presentación no selecciona fixtures directamente. |
 | Browser boundary | `useCamera` y `useSpeech` encapsulan `getUserMedia` y `speechSynthesis`; ninguna integración implica un servicio remoto. |
 
-### Definitive Target Tree
+### Current Workspace Tree
 
 ```text
 apps/signbridge-ai/
@@ -222,6 +242,10 @@ apps/signbridge-ai/
 └── vite.config.ts
 ```
 
-## Phase Boundary
+## Current Prototype Boundary
 
-This architecture is documentation only in Phase 1. No React component, package manifest, application source, backend, authentication, payment integration, or external AI integration is created by this phase.
+This document describes the implemented frontend prototype workspace as it exists now.
+
+The repository does not currently provide a shared production backend, authentication platform, payment infrastructure, external AI model, production routing service, or synchronized persistence layer.
+
+Future production integrations require explicit decisions for privacy, security, persistence, API contracts, observability, moderation, operating cost, model quality, availability, and external-provider failure handling.

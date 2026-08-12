@@ -1,6 +1,6 @@
 # Proposal Context and Product Boundaries
 
-This document defines the three product proposals and the academic portal for the Ingeniería de Software I presentation. The implementation target is a responsive, navigable, high-fidelity prototype in Spanish UI copy. Phase 1 documentation is completed before implementation begins.
+This document defines the seven product proposals and the academic portal for the Ingeniería de Software I presentation. The implementation target is a responsive, navigable, high-fidelity prototype in Spanish UI copy.
 
 ## Shared Context
 
@@ -14,13 +14,13 @@ This document defines the three product proposals and the academic portal for th
 
 ## 1. Portal de Propuestas (`portal-propuestas`)
 
-The academic portal is the presentation surface for the three product proposals. It makes the problem, value proposition, flow, and prototype evidence easy to review without requiring an evaluator to understand the monorepo first.
+The academic portal is the presentation surface for the seven product proposals. It makes the problem, value proposition, flow, and prototype evidence easy to review without requiring an evaluator to understand the monorepo first.
 
 | Area | Definition |
 | --- | --- |
 | Problem | Proposal information is commonly fragmented across slides, links, and separate demos, making comparison and evaluation slower. |
 | Beneficiaries | Ingeniería de Software I students, instructors, reviewers, and presentation audiences. |
-| Primary function | Present the three proposals, navigate to each product overview, compare core criteria, and open a prototype flow. |
+| Primary function | Present the seven proposals, navigate to each product overview, compare core criteria, and open a prototype flow. |
 | Expected quality | Clear hierarchy, fast orientation, responsive layouts, keyboard navigation, stable local content, and visible distinction between demonstrated behavior and future scope. |
 | Productivity | Gives the team one reusable review surface and reduces repeated explanation during the proposal presentation. |
 | Innovation | Treats proposal evidence, user flows, and acceptance criteria as navigable product content rather than a static slide-only artifact. The innovation claim is about communication, not artificial intelligence. |
@@ -110,4 +110,11 @@ SignBridge AI explora una ayuda accesible para interpretar vocabularios de lengu
 
 ## Presentation Boundary
 
-The presentation may say that the team designed and will implement three coherent, testable product prototypes presented through one academic portal. It must not say that the prototypes already operate a municipal service, recognize arbitrary handwriting, match real pets, process payments, authenticate users, or use a real AI model. Those statements belong to a future validation roadmap only.
+The presentation may say that the team designed coherent, testable product prototypes presented through one academic portal. It must not say that the prototypes already operate a municipal service, recognize arbitrary handwriting, match real pets, process payments, authenticate users, run real marketplaces, or use a real AI model. Those statements belong to a future validation roadmap only.
+## CanastaAI
+
+CanastaAI is a consumer-facing academic prototype for collaborative grocery price intelligence in Santa Cruz de la Sierra. It demonstrates how a person can scan a receipt, review normalized products and prices, contribute those prices conceptually to the community, compare a weekly basket across stores, and evaluate whether extra travel is worth the savings. The primary beneficiaries are consumers and families that compare recurring purchases. Its quality focus is a mobile-first flow with clear monetary hierarchy, simulated receipt confirmation, and explicit demo-data boundaries. The productivity hypothesis is reduced manual price comparison. The innovation is using everyday receipts as the data-generation mechanism for community prices. The monetization hypothesis is CanastaAI Plus with unlimited baskets, advanced alerts and price history. Prototype limits: no real OCR, AI, backend, GPS, payments, scraping or store integration.
+
+## ReciScan
+
+ReciScan is a mobile-first academic prototype for a recyclable-material marketplace and recovery network in Santa Cruz de la Sierra. It connects people who have recyclable material with independent recyclers and buyers who want that material. The seller flow scans and publishes material with approximate quantity, condition and reference value. The recycler flow discovers nearby opportunities, reserves listings and groups collections into a route. Quality focuses on safe approximate locations, visible estimated versus confirmed quantities, and natural Spanish copy. Productivity comes from turning dispersed opportunities into a route of work. Monetization is represented by ReciScan Pro for recyclers. Prototype limits: no real computer vision, backend, GPS, payment, chat or routing service.

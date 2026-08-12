@@ -1,9 +1,11 @@
-export type ProposalId =
+﻿export type ProposalId =
   | 'mejora-mi-barrio'
   | 'cuaderno-matematico'
   | 'encuentra-mi-mascota'
   | 'nutrivision'
   | 'signbridge-ai'
+  | 'canasta-ai'
+  | 'reciscan'
 
 export type ProposalCriterionKey =
   | 'calidad'

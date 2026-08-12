@@ -297,3 +297,10 @@ Low-confidence, duplicate, and no-match results are not transport errors. They a
 ## Replacement Boundary
 
 If a future real service is evaluated, it must implement an adapter that maps external responses into these domain contracts, records its own failure and privacy behavior, and keeps the UI disclaimer accurate. Replacing the mock must not silently turn a prototype claim into a production guarantee.
+## CanastaAI Mock Services
+
+CanastaAI uses deterministic local services only. `analyzeReceipt()` returns the Super Ahorro Equipetrol demo receipt with status `success`, scenario id `demo-receipt-success`, latency metadata and `disclaimer: 'simulated'`. `compareBasket()` calculates one of three recommendation strategies from local price fixtures: mayor ahorro, menor distancia or equilibrio. `getProductPrices()` and `getProductHistory()` read centralized fixtures for Santa Cruz store prices and product-specific trend points. No OCR, live AI, backend, scraping, GPS or payment service is called.
+
+## ReciScan Mock Services
+
+ReciScan uses deterministic local services only. `analyzeMaterial()` returns the PET demo scan with status `success`, scenario id `pet-demo-success`, latency metadata and `disclaimer: 'simulated'`. `getNearbyListings()`, `getListing()`, `getRecyclerMatches()`, `buildCollectionRoute()` and `getMaterialPriceReference()` read centralized fixtures. No real computer vision, GPS, chat, routing, payment, backend or marketplace network is called.
