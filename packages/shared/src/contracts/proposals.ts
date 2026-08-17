@@ -1,11 +1,7 @@
-﻿export type ProposalId =
-  | 'mejora-mi-barrio'
-  | 'cuaderno-matematico'
-  | 'encuentra-mi-mascota'
-  | 'nutrivision'
-  | 'signbridge-ai'
-  | 'canasta-ai'
-  | 'reciscan'
+﻿// Proposal ids are registered in this union as prototypes are created from the
+// proposal documents in `docs/propuestas/`. The catalog starts empty; when a new
+// prototype is scaffolded, add its kebab-case id here (for example `lectovoz`).
+export type ProposalId = never
 
 export type ProposalCriterionKey =
   | 'calidad'

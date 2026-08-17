@@ -34,7 +34,7 @@ export function HomePage({
             Propuestas que se pueden <span className="text-primary">recorrer, comparar y discutir.</span>
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-muted">
-            Una superficie académica para revisar siete ideas de producto con evidencia, límites claros y un prototipo local por explorar.
+            Una superficie académica para revisar ideas de producto con evidencia, límites claros y un prototipo local por explorar.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a className="focus-ring group inline-flex min-h-14 items-center gap-3 rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-quiet transition-[background-color,transform] duration-280 ease-spring hover:-translate-y-0.5 hover:bg-primary/90 active:scale-[0.98]" href="#propuestas">
@@ -46,7 +46,7 @@ export function HomePage({
             </Link>
           </div>
           <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-muted">
-            <span><strong className="font-display text-2xl text-ink">07</strong> productos</span>
+            <span><strong className="font-display text-2xl text-ink">{String(proposals.length).padStart(2, '0')}</strong> productos</span>
             <span><strong className="font-display text-2xl text-ink">06</strong> criterios</span>
             <span><strong className="font-display text-2xl text-ink">01</strong> portal</span>
           </div>
@@ -95,34 +95,40 @@ export function HomePage({
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
             <span className="eyebrow">Catálogo local</span>
-            <h2 id="proposals-title" className="mt-4 font-display text-4xl font-bold tracking-[-0.04em] text-ink md:text-5xl">Siete productos para mirar de cerca.</h2>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-muted">Cada ficha reúne el problema, la promesa de calidad, el recorrido principal y los límites que todavía deben validarse.</p>
+            <h2 id="proposals-title" className="mt-4 font-display text-4xl font-bold tracking-[-0.04em] text-ink md:text-5xl">{proposals.length > 0 ? 'Propuestas para mirar de cerca.' : 'El catálogo se está armando.'}</h2>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-muted">{proposals.length > 0 ? 'Cada ficha reúne el problema, la promesa de calidad, el recorrido principal y los límites que todavía deben validarse.' : 'Los prototipos se crean desde las propuestas documentadas en docs/propuestas/. Cuando un prototipo nuevo se registre, su ficha aparece acá.'}</p>
           </div>
-          <div className="w-full max-w-md">
-            <Field label="Buscar una propuesta" htmlFor="proposal-search" hint="Prueba con el nombre, la categoría o una palabra del resumen.">
-              <div className="relative">
-                <Search aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" />
-                <Input id="proposal-search" aria-describedby="proposal-search-message" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Ej.: aprendizaje" className="pl-12" type="search" />
+              {proposals.length > 0 && (
+                <div className="w-full max-w-md">
+                  <Field label="Buscar una propuesta" htmlFor="proposal-search" hint="Prueba con el nombre, la categoría o una palabra del resumen.">
+                    <div className="relative">
+                      <Search aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" />
+                      <Input id="proposal-search" aria-describedby="proposal-search-message" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Ej.: aprendizaje" className="pl-12" type="search" />
+                    </div>
+                  </Field>
+                </div>
+              )}
+            </div>
+            {visibleProposals.length > 0 ? (
+              <div className="grid gap-6 lg:grid-cols-3">
+                {visibleProposals.map((proposal, index) => (
+                  <div key={proposal.id} className="reveal" style={{ animationDelay: `${index * 90}ms` }}>
+                    <ProposalCard proposal={proposal} onCompare={onCompare} isCompared={comparedIds.includes(proposal.id)} appUrl={resolveAppUrl(proposal)} />
+                  </div>
+                ))}
               </div>
-            </Field>
-          </div>
-        </div>
-        {visibleProposals.length > 0 ? (
-          <div className="grid gap-6 lg:grid-cols-3">
-            {visibleProposals.map((proposal, index) => (
-              <div key={proposal.id} className="reveal" style={{ animationDelay: `${index * 90}ms` }}>
-                <ProposalCard proposal={proposal} onCompare={onCompare} isCompared={comparedIds.includes(proposal.id)} appUrl={resolveAppUrl(proposal)} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <EmptyState title="No encontramos propuestas" icon={<SearchX aria-hidden="true" className="h-5 w-5" />} action={<Button variant="secondary" onClick={() => setQuery('')}>Limpiar filtros</Button>}>
-            Cambiá el término de búsqueda o limpiá el filtro para volver a ver el catálogo local.
-          </EmptyState>
-        )}
+            ) : proposals.length === 0 ? (
+              <EmptyState title="Aún no hay prototipos registrados" icon={<SearchX aria-hidden="true" className="h-5 w-5" />}>
+                El catálogo se llena cuando un prototipo nuevo se crea desde las propuestas documentadas en docs/propuestas/ y se registra en el portal.
+              </EmptyState>
+            ) : (
+              <EmptyState title="No encontramos propuestas" icon={<SearchX aria-hidden="true" className="h-5 w-5" />} action={<Button variant="secondary" onClick={() => setQuery('')}>Limpiar filtros</Button>}>
+                Cambiá el término de búsqueda o limpiá el filtro para volver a ver el catálogo local.
+              </EmptyState>
+            )}
       </section>
 
-      <ComparisonStrip proposals={proposals} />
+      {proposals.length > 0 && <ComparisonStrip proposals={proposals} />}
     </div>
   )
 }

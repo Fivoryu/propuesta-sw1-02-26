@@ -7,17 +7,10 @@
                     "build":  "corepack pnpm -r --if-present run build",
                     "dev":  "corepack pnpm --filter @propuestas/portal-propuestas dev",
                     "dev:portal":  "corepack pnpm --filter @propuestas/portal-propuestas dev",
-                    "dev:barrio":  "corepack pnpm --filter @propuestas/mejora-mi-barrio dev",
-                    "dev:cuaderno":  "corepack pnpm --filter @propuestas/cuaderno-matematico dev",
-                    "dev:mascota":  "corepack pnpm --filter @propuestas/encuentra-mi-mascota dev",
-                    "dev:nutrivision":  "corepack pnpm --filter @propuestas/nutrivision dev",
-                    "dev:signbridge":  "corepack pnpm --filter @propuestas/signbridge-ai dev",
                     "test":  "vitest",
                     "test:run":  "vitest run",
                     "typecheck":  "tsc -b",
-                    "clean":  "corepack pnpm -r --if-present run clean",
-                    "dev:canasta":  "corepack pnpm --filter @propuestas/canasta-ai dev",
-                    "dev:reciscan":  "corepack pnpm --filter @propuestas/reciscan dev"
+                    "clean":  "corepack pnpm -r --if-present run clean"
                 },
     "devDependencies":  {
                             "@testing-library/jest-dom":  "6.9.1",
