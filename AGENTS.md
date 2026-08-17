@@ -4,33 +4,60 @@ Guidance for developers and AI agents working in this repository. This document 
 first thing to read before modifying the workspace, and it is the reference for adding
 new proposal prototypes over time.
 
+## Do not build — reserved proposals
+
+**LectoVoz and VoxLens are reserved by another group. NEVER scaffold, prototype, code,
+or register an app for these two proposals, and never extend `docs/propuestas/lectovoz.md`
+or `docs/propuestas/voxlens.md`.** If asked to build them, stop and tell the user they are
+off-limits. These files exist only as reference copies of another group's ideas.
+
 ## Repository purpose
 
 A pnpm monorepo of high-fidelity **frontend prototypes** for Ingeniería de Software I.
-It contains an academic portal plus one independent application per product proposal.
-Everything runs locally: there is no backend, no real authentication, no payments, and
-no real AI. All analysis, recognition, and matching behavior is simulated with
-deterministic mock services, local fixtures, and controlled delays.
+It contains the academic portal (`portal-propuestas`) plus one independent application
+per product proposal. Everything runs locally: there is no backend, no real
+authentication, no payments, and no real AI. All analysis, recognition, and matching
+behavior is simulated with deterministic mock services, local fixtures, and controlled
+delays.
 
-Current proposals:
+The portal catalog starts **empty by design**: it is populated as prototypes are
+created and registered. Until then the portal shows a first-class empty state instead of
+dead links.
 
-- **Mejora Mi Barrio** — civic issue capture and simulated urban analysis.
-- **Cuaderno Matemático** — handwriting notebook with mock LaTeX equation recognition.
-- **Encuentra Mi Mascota** — lost/found pet profiles with simulated visual matching.
+## Where the proposals live
+
+The source of truth for every proposal is `docs/propuestas/` — not the apps. Each file
+there is a Spanish 5-section proposal document (functionalities, design challenge,
+innovation, monetization, tech stack) with AI or blockchain as its central component,
+created with the `propuesta-innovadora` skill (see below).
+
+Current documents:
+
+- **braillevision.md** — braille text recognition by camera.
+- **fisiolens.md** — (health proposal, see the document).
+- **roomforge.md** — (design/architecture proposal, see the document).
+- **estudia.md** — (education proposal, see the document).
+- **vencia.md** — (see the document).
+- **lectovoz.md** and **voxlens.md** — **reserved by another group, do not build**
+  (see "Do not build — reserved proposals").
+
+To create a prototype for a proposal, read `docs/propuestas/<id>.md` first, then follow
+"How to add a new proposal prototype" below. The document defines the domain rules, the
+mock-AI contract to simulate, and the flows the prototype must demonstrate.
 
 ## Structure
 
 ```text
 apps/
   portal-propuestas/        Academic catalog, proposal details, comparison
-  mejora-mi-barrio/         Product prototype (independent Vite app)
-  cuaderno-matematico/      Product prototype (independent Vite app)
-  encuentra-mi-mascota/     Product prototype (independent Vite app)
+  <proposal-id>/            One independent app per registered proposal
 packages/
   ui/                       Shared accessible primitives, tokens, styles
   shared/                   Cross-app contracts and fictional fixtures
   config/                   Strict TypeScript base configs
-docs/                       Context, architecture, design, flows, mock-AI, acceptance
+docs/
+  propuestas/               Proposal documents (source of truth for prototypes)
+  ...                       Context, architecture, design, flows, mock-AI, acceptance
 ```
 
 Each app owns its routes, domain rules, local state, and mock adapter. No app imports
@@ -44,9 +71,6 @@ corepack pnpm test:run          # Vitest + React Testing Library, zero mock late
 corepack pnpm typecheck         # TypeScript strict, project references
 corepack pnpm build             # Builds every workspace package
 corepack pnpm dev:portal        # http://localhost:5173
-corepack pnpm dev:barrio        # http://localhost:5174
-corepack pnpm dev:cuaderno      # http://localhost:5175
-corepack pnpm dev:mascota       # http://localhost:5176
 ```
 
 Run checks for one app only:
@@ -62,9 +86,14 @@ corepack pnpm --filter @propuestas/<app-name> build
 Adding a proposal means adding a new independent app and registering it in the portal
 catalog. Follow this order; never skip the documentation step.
 
-### 1. Document first
+### 1. Start from the proposal document
 
-Before any UI work, extend `docs/` so the new proposal has the same baseline:
+Pick the proposal in `docs/propuestas/` you are prototyping and read it completely. If
+no document exists for the idea, create one first with the `propuesta-innovadora` skill
+(see Skills). Never invent domain rules that the document does not support, and never
+build a reserved proposal (see "Do not build — reserved proposals").
+
+Then extend `docs/` so the new prototype has the same baseline docs:
 
 - `docs/CONTEXT.md` — problem, beneficiaries, primary function, quality, productivity,
   innovation, monetization hypothesis, prototype limits.
@@ -96,13 +125,15 @@ package scope; use `@propuestas/<proposal-id>`.
 
 - `packages/shared/src/contracts/proposals.ts`
   — extend `ProposalId` with the new id and extend `accent` if a new theme color is
-  needed (portal supports `'teal' | 'cobalt' | 'violet'`).
+  needed (portal supports `'teal' | 'cobalt' | 'violet' | 'amber' | 'rose'`).
 - `packages/shared/src/fixtures/proposal-catalog.fixture.ts`
   — add one complete `Proposal` entry: name, summary, problem, beneficiaries,
   technologies, flow, comparison criteria, `accent`, and `appUrlEnvVar`
   (e.g. `VITE_<PROPOSAL_ID>_APP_URL`).
-- Portal app URL resolution is already generic via `proposal.appUrlEnvVar`
-  (`apps/portal-propuestas/src/services/app-urls.ts`); document the new variable in
+- Portal app URL resolution reads `proposal.appUrlEnvVar` and falls back to the
+  app's default local dev port
+  (`apps/portal-propuestas/src/services/app-urls.ts`); register the app's fixed
+  port in `DEFAULT_DEV_PORT` (next free port, starting at 5174) and document it in
   the root `README.md` dev-server table.
 
 ### 4. Mock service contract
@@ -125,6 +156,13 @@ corepack pnpm build
 ```
 
 Do not commit until all checks pass.
+
+## Skills
+
+- `.pi/skills/propuesta-innovadora/SKILL.md` — guides creating new academic
+  proposals (in Spanish, 5-section format) with mandatory web research and a
+  central AI/blockchain component. Use it before adding a new `docs/propuestas/`
+  entry or when the user asks for a new proposal idea.
 
 ## Conventions
 
